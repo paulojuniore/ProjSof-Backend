@@ -42,6 +42,7 @@ public class UserController {
 		return new ResponseEntity<User>( userService.findByEmail(email), HttpStatus.OK);
 	}
 	
+	// Cadastro de um novo usuário.
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
