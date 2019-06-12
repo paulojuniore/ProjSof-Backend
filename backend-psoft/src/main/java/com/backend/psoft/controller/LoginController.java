@@ -48,6 +48,7 @@ public class LoginController {
 		return new LoginResponse(token);
 	}
 	
+	// Responsável pelo token de acesso
 	private class LoginResponse {
 		private String token;
 		
