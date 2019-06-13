@@ -1,9 +1,13 @@
 package com.backend.psoft.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User {
 	
 	private String firstName;
