@@ -26,6 +26,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 public class EmailConfig {
 
     // Fornece controle sobre onde e como a ligação entre os beans deve ser realizada.
+    // Injeta automaticamente uma instancia de Environment, para que não seja necessário usar um new
     @Autowired
     private Environment env;
 
