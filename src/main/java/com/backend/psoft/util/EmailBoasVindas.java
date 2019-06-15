@@ -19,8 +19,8 @@ public class EmailBoasVindas {
         this.destNome = destNome;
         this.destEmail = destEmail;
         this.remetente = "Avalia Disciplinas UFCG <avaliadisciplinasufcg@gmail.com>";
-        this.assunto = "Bem Vindo ao Avalia Disciplinas UFCG!!";
-        this.mensagem = "Seja bem vindo ao sistema de avaliações de disciplinas da UFCG\n" +
+        this.assunto = "Bem vindo ao Avalia Disciplinas UFCG!!";
+        this.mensagem = "Seja bem vindo ao sistema de avaliações de disciplinas da UFCG\n\n\n" +
                 "Acesse o site no link a seguir: <link>";
     }
 

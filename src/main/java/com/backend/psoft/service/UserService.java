@@ -29,7 +29,6 @@ public class UserService {
 		if (u != null) {
 			throw new ServletException("Usuário já existente!");
 		} else {
-
 			// Envia um E-mail de boas vindas aos novos usuarios.
 			String nome = user.getFirstName() + " " + user.getLastName();
 			EmailBoasVindas emailBoasVindas = new EmailBoasVindas(nome, user.getEmail());
@@ -37,7 +36,6 @@ public class UserService {
 			System.out.println(mensagemEnvio.getCorpo());
 			enviaEmail.enviar(mensagemEnvio);
 		}
-
 		return userDAO.save(user);
 	}
 
