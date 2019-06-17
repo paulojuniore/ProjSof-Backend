@@ -6,6 +6,8 @@ import java.util.Arrays;
  *Classe para E-mail de boas vindas, criada pelo fato de ser um E-mail generico,
  * só muda o remetente.
  *
+ * Está enviando um link com um token único para o e-mail do usuário, o cadastro
+ * só é confirmado quando ele clica no link.
  * Parametros: Nome do destinatario já concatenado - "nome sobrenome"
  *             Email do destinatario
  *
@@ -15,13 +17,13 @@ public class EmailBoasVindas {
 
     private String destNome, destEmail, remetente, assunto, mensagem;
 
-    public EmailBoasVindas(String destNome, String destEmail) {
+    public EmailBoasVindas(String destNome, String destEmail, String token) {
         this.destNome = destNome;
         this.destEmail = destEmail;
         this.remetente = "Avalia Disciplinas UFCG <avaliadisciplinasufcg@gmail.com>";
         this.assunto = "Bem vindo ao Avalia Disciplinas UFCG!!";
-        this.mensagem = "Seja bem vindo ao sistema de avaliações de disciplinas da UFCG\n\n\n" +
-                "Acesse o site no link a seguir: <link>";
+        this.mensagem = "Seja bem vindo ao sistema de avaliações de disciplinas da UFCG!\n\n" +
+                "Acesse o link a seguir para confirmar seu cadastro: \n" + "http://localhost:8080/api/users/verify/" + token;
     }
 
 

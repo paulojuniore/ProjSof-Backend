@@ -35,6 +35,20 @@ public class UserController {
 		}
 		return new ResponseEntity<User>( userService.findByEmail(email), HttpStatus.OK);
 	}
+
+	/*
+	 * Caminho que verifica um token e confirma o cadastro de um usuário
+	 */
+	@GetMapping(value = "/verify/{token}") // Apagar os token depois.
+	public String verifyToken(@PathVariable String token) {
+
+		if (userService.verificaToken(token)) {
+
+			return "Deu certo"; // Mudar retorno.
+		}
+
+		return "Deu errado cara"; // Mudar retorno
+	}
 	
 	// Cadastro de um novo usuário.
 	@CrossOrigin

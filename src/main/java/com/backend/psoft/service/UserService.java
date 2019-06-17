@@ -1,29 +1,38 @@
 package com.backend.psoft.service;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
 import com.backend.psoft.util.EmailBoasVindas;
 import com.backend.psoft.util.EnviaEmail;
 import com.backend.psoft.util.Mensagem;
+import com.backend.psoft.util.VerificaCadastro;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.psoft.dao.UserDAO;
 import com.backend.psoft.model.User;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 public class UserService {
 	
 	private final UserDAO userDAO;
+	private HashMap <String, User> tokens;
 
 	@Autowired
 	private EnviaEmail enviaEmail;
+	@Autowired
+	private VerificaCadastro verifica;
 
 	public UserService (UserDAO userDAO) {
 		this.userDAO = userDAO;
+		this.tokens = new HashMap<String, User>();
 	}
-	
+
 	public User create(User user) throws ServletException {
 		User u = userDAO.findByEmail(user.getEmail());
 		if (u != null) {
@@ -31,12 +40,38 @@ public class UserService {
 		} else {
 			// Envia um E-mail de boas vindas aos novos usuarios.
 			String nome = user.getFirstName() + " " + user.getLastName();
-			EmailBoasVindas emailBoasVindas = new EmailBoasVindas(nome, user.getEmail());
+			// Gerando token para confirmar cadastro.
+			String token = verifica.geraToken(user.getEmail());
+			this.tokens.put(token, user);
+			EmailBoasVindas emailBoasVindas = new EmailBoasVindas(nome, user.getEmail(), token);
 			Mensagem mensagemEnvio = emailBoasVindas.converteMensagem();
-			System.out.println(mensagemEnvio.getCorpo());
 			enviaEmail.enviar(mensagemEnvio);
+
 		}
-		return userDAO.save(user);
+		return null;
+	}
+
+	/*
+	 * Cadastra um usuário a partir do token que ele recebeu no e-mail.
+	 */
+	private void cadastraUser(String token) {
+
+		User user = tokens.get(token);
+		userDAO.save(user);
+
+	}
+
+
+	// Método que verifica se um token é pertencente a algum usuário.
+	public Boolean verificaToken(String token) {
+
+		if (tokens.containsKey(token)) {
+			cadastraUser(token);
+			return true;
+
+		}
+
+		return false;
 	}
 
 	public User findByEmail(String login) {
