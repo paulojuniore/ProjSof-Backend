@@ -18,39 +18,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name="subjects")
 public class Subject {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 
+	@Id
 	private String subjectName;
 
-	@Column
-	@ElementCollection(targetClass=User.class)
-	private List<User> likes;
-
-	@Column
-	@ElementCollection(targetClass=User.class)
-	private List<User> deslikes;
-	
 	public Subject() {
 		
 	}
-	
-	public Subject(String subjectName) {
-		this.id = id;
+
+	public Subject(long id, String subjectName) {
+
 		this.subjectName = subjectName;
-		this.likes = likes;
-		this.deslikes = deslikes;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getSubjectName() {
 		return subjectName;
@@ -60,20 +40,5 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	public List<User> getLikes() {
-		return likes;
-	}
-
-	public void setLikes(List<User> likes) {
-		this.likes = likes;
-	}
-
-	public List<User> getDeslikes() {
-		return deslikes;
-	}
-
-	public void setDeslikes(List<User> deslikes) {
-		this.deslikes = deslikes;
-	}
 
 }
