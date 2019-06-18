@@ -37,7 +37,7 @@ public class Subject {
 		
 	}
 	
-	public Subject(long id, String subjectName) {
+	public Subject(String subjectName) {
 		this.id = id;
 		this.subjectName = subjectName;
 	}
