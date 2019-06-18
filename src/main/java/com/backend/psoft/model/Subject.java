@@ -25,11 +25,11 @@ public class Subject {
 
 	private String subjectName;
 
-	@Column(name = "likes")
+	@Column
 	@ElementCollection(targetClass=User.class)
 	private List<User> likes;
 
-	@Column(name = "deslikes")
+	@Column
 	@ElementCollection(targetClass=User.class)
 	private List<User> deslikes;
 	
@@ -42,7 +42,7 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 	
-	public Subject(long id, String subjectName, List<User> likes, List<User> deslikes) {
+	public Subject(String subjectName) {
 		this.id = id;
 		this.subjectName = subjectName;
 		this.likes = likes;
