@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,13 +45,26 @@ public class SubjectController {
 		if(subject == null) {
 			throw new ServletException("Disciplina inexistente na base de dados.");
 		}
-		return new ResponseEntity<Subject>( subjectService.findById(id), HttpStatus.OK);
+		return new ResponseEntity<Subject>(subject, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Subject> create(@RequestBody Subject subject) throws ServletException {
-		return new ResponseEntity<Subject>( subjectService.create(subject), HttpStatus.CREATED );
+		Subject verifier = subjectService.findByName(subject.getSubjectName());
+		if(verifier == null) {
+			return new ResponseEntity<Subject>( subjectService.create(subject), HttpStatus.CREATED );			
+		}
+		throw new ServletException("Erro ao cadastrar! Disciplina já cadastrada na base de dados.");
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Subject> delete(@PathVariable long id) throws ServletException {
+		Subject subject = subjectService.findById(id);
+		if(subject == null) {
+			throw new ServletException("Erro ao deletar! Disciplina inexistente na base de dados.");
+		}
+		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 }

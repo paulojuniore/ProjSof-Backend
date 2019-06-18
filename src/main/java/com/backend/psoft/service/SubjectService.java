@@ -25,12 +25,20 @@ public class SubjectService {
 		return this.subjectDAO.findById(id);
 	}
 	
+	public Subject findByName(String name) {
+		return this.subjectDAO.findBySubjectName(name);
+	}
+	
 	public Subject create(Subject subject) {
 		return this.subjectDAO.save(subject);
 	}
 	
 	public List<Subject> list() {
 		return this.subjectDAO.findAll();
+	}
+	
+	public void delete(long id) {
+		this.subjectDAO.deleteById(id);
 	}
 
 }
