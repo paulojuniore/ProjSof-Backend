@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
@@ -57,5 +58,17 @@ public class UserController {
 	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
 		return new ResponseEntity<User>( userService.create(user), HttpStatus.CREATED );
 	}
+	
+	// Deletando um usuário já existente
+	/*
+	@DeleteMapping("/{email}")
+	public ResponseEntity<User> delete(@PathVariable String email) throws ServletException {
+		User user = userService.findByEmail(email);
+		if(user == null) {
+			throw new ServletException("Erro ao deletar! E-mail inexistente na base de dados.");
+		}
+		return new ResponseEntity<User>( userService.deleteByEmail(email), HttpStatus.OK);
+	}
+	*/
 	
 }

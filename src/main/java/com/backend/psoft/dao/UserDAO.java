@@ -18,5 +18,10 @@ public interface UserDAO extends JpaRepository<User, String> {
 	
 	@Query(value="Select u from User u where u.email=:pemail")
 	User findByEmail(@Param("pemail") String email);
+	
+	/*
+	@Query(value="Delete from User u where u.email=:pemail")
+	void deleteByEmail(@Param("pemail") String email);
+	*/
 
 }

@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class UserService {
 	
 	private final UserDAO userDAO;
+	
 	private HashMap <String, User> tokens;
 
 	@Autowired
 	private EnviaEmail enviaEmail;
+	
 	@Autowired
 	private VerificaCadastro verifica;
 
@@ -46,7 +48,6 @@ public class UserService {
 			EmailBoasVindas emailBoasVindas = new EmailBoasVindas(nome, user.getEmail(), token);
 			Mensagem mensagemEnvio = emailBoasVindas.converteMensagem();
 			enviaEmail.enviar(mensagemEnvio);
-
 		}
 		return null;
 	}
@@ -55,28 +56,29 @@ public class UserService {
 	 * Cadastra um usuário a partir do token que ele recebeu no e-mail.
 	 */
 	private void cadastraUser(String token) {
-
 		User user = tokens.get(token);
 		userDAO.save(user);
-
 	}
 
 
 	// Método que verifica se um token é pertencente a algum usuário.
 	public Boolean verificaToken(String token) {
-
 		if (tokens.containsKey(token)) {
 			cadastraUser(token);
 			return true;
-
 		}
-
 		return false;
 	}
 
 	public User findByEmail(String login) {
 		return userDAO.findByEmail(login);
 	}
+	
+	/*
+	public void deleteByEmail(String email) {
+		userDAO.deleteByEmail(email);
+	}
+	*/
 	
 	public List<User> list() {
 		return this.userDAO.findAll();
