@@ -35,7 +35,7 @@ public class UserService {
 		this.tokens = new HashMap<String, User>();
 	}
 
-	public User create(User user) throws ServletException {
+	public void create(User user) throws ServletException {
 		User u = userDAO.findByEmail(user.getEmail());
 		if (u != null) {
 			throw new ServletException("Usuário já existente!");
@@ -49,7 +49,6 @@ public class UserService {
 			Mensagem mensagemEnvio = emailBoasVindas.converteMensagem();
 			enviaEmail.enviar(mensagemEnvio);
 		}
-		return null;
 	}
 
 	/*
