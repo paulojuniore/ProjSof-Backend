@@ -25,11 +25,11 @@ public class Subject {
 
 	private String subjectName;
 
-	@Column
+	@Column(name = "likes")
 	@ElementCollection(targetClass=User.class)
 	private List<User> likes;
 
-	@Column
+	@Column(name = "deslikes")
 	@ElementCollection(targetClass=User.class)
 	private List<User> deslikes;
 	
