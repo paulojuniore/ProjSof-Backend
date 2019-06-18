@@ -58,6 +58,15 @@ public class UserController {
 	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
 		return new ResponseEntity<User>( userService.create(user), HttpStatus.CREATED );
 	}
+
+	// Foi necessário gerar essa rota para consertar um bug que estava havendo no POST quando
+	// usava a rota sem a / no final.
+	@CrossOrigin
+	@PostMapping(value = "")
+	@ResponseBody
+	public void createError(@RequestBody User user) throws ServletException {
+		throw new ServletException("Url invalida para cadastro.");
+	}
 	
 	// Deletando um usuário já existente
 	/*

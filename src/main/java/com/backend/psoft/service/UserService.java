@@ -57,7 +57,10 @@ public class UserService {
 	 */
 	private void cadastraUser(String token) {
 		User user = tokens.get(token);
-		userDAO.save(user);
+
+		if (user != null) {
+			userDAO.save(user);
+		}
 	}
 
 
@@ -65,6 +68,7 @@ public class UserService {
 	public Boolean verificaToken(String token) {
 		if (tokens.containsKey(token)) {
 			cadastraUser(token);
+			tokens.remove(token);
 			return true;
 		}
 		return false;

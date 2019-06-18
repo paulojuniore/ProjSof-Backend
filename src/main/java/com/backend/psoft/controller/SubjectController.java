@@ -58,6 +58,7 @@ public class SubjectController {
 		throw new ServletException("Erro ao cadastrar! Disciplina já cadastrada na base de dados.");
 	}
 
+	// Metodo que efetua o cadastro das disciplinas atravez de um array de disciplinas
 	@PostMapping(value = "/fromList/")
 	@ResponseBody
 	public ResponseEntity<List<Subject>> createForList(@RequestBody Subject[] subjects) throws ServletException {
