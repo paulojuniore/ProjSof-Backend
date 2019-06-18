@@ -1,5 +1,9 @@
 package com.backend.psoft.model;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +25,13 @@ public class Subject {
 	
 	private String subjectName;
 	
-	private long likes;
+	@Column
+	@ElementCollection(targetClass=User.class)
+	private List<User> likes;
 	
-	private long deslikes;
+	@Column
+	@ElementCollection(targetClass=User.class)
+	private List<User> deslikes;
 	
 	public Subject() {
 		
@@ -34,7 +42,7 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 	
-	public Subject(long id, String subjectName, long likes, long deslikes) {
+	public Subject(long id, String subjectName, List<User> likes, List<User> deslikes) {
 		this.id = id;
 		this.subjectName = subjectName;
 		this.likes = likes;
@@ -57,19 +65,19 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	public long getLikes() {
+	public List<User> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(long likes) {
+	public void setLikes(List<User> likes) {
 		this.likes = likes;
 	}
 
-	public long getDeslikes() {
+	public List<User> getDeslikes() {
 		return deslikes;
 	}
 
-	public void setDeslikes(long deslikes) {
+	public void setDeslikes(List<User> deslikes) {
 		this.deslikes = deslikes;
 	}
 
