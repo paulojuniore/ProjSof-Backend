@@ -1,7 +1,6 @@
 package com.backend.psoft.service;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -9,13 +8,11 @@ import com.backend.psoft.util.EmailBoasVindas;
 import com.backend.psoft.util.EnviaEmail;
 import com.backend.psoft.util.Mensagem;
 import com.backend.psoft.util.VerificaCadastro;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.psoft.dao.UserDAO;
 import com.backend.psoft.model.User;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 public class UserService {
@@ -35,7 +32,7 @@ public class UserService {
 		this.tokens = new HashMap<String, User>();
 	}
 
-	public User create(User user) throws ServletException {
+	public void create(User user) throws ServletException {
 		User u = userDAO.findByEmail(user.getEmail());
 		if (u != null) {
 			throw new ServletException("Usuário já existente!");
@@ -49,7 +46,6 @@ public class UserService {
 			Mensagem mensagemEnvio = emailBoasVindas.converteMensagem();
 			enviaEmail.enviar(mensagemEnvio);
 		}
-		return null;
 	}
 
 	/*

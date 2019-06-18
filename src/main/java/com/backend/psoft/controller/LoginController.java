@@ -5,10 +5,7 @@ import java.util.Date;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
@@ -24,7 +21,8 @@ public class LoginController {
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@CrossOrigin
 	@PostMapping("/login")
 	public LoginResponse authenticate(@RequestBody User user) throws ServletException {
 		// Recupera o usuário

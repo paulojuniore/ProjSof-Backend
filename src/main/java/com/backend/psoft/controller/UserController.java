@@ -34,7 +34,7 @@ public class UserController {
 		if(user == null) {
 			throw new ServletException("Usuário inexistente na base de dados");
 		}
-		return new ResponseEntity<User>( userService.findByEmail(email), HttpStatus.OK);
+		return new ResponseEntity<User>(userService.findByEmail(email), HttpStatus.OK);
 	}
 
 	/*
@@ -54,7 +54,8 @@ public class UserController {
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
-		return new ResponseEntity<User>( userService.create(user), HttpStatus.CREATED );
+		userService.create(user);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	// Foi necessário gerar essa rota para consertar um bug que estava havendo no POST quando
