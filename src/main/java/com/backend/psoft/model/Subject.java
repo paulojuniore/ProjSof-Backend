@@ -19,17 +19,16 @@ import javax.persistence.Table;
 @Table(name="subjects")
 public class Subject {
 	
-
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Id
 	private String subjectName;
-	
+
 	@Column
 	@ElementCollection(targetClass=User.class)
 	private List<User> likes;
-	
+
 	@Column
 	@ElementCollection(targetClass=User.class)
 	private List<User> deslikes;
