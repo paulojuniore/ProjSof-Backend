@@ -19,10 +19,11 @@ import javax.persistence.Table;
 @Table(name="subjects")
 public class Subject {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
+	@Id
 	private String subjectName;
 	
 	@Column
