@@ -40,11 +40,6 @@ public class Subject {
 	public Subject(String subjectName) {
 		this.id = id;
 		this.subjectName = subjectName;
-	}
-	
-	public Subject(String subjectName) {
-		this.id = id;
-		this.subjectName = subjectName;
 		this.likes = likes;
 		this.deslikes = deslikes;
 	}
