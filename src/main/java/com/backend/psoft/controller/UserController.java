@@ -42,12 +42,10 @@ public class UserController {
 	 */
 	@GetMapping(value = "/verify/{token}") // Apagar os token depois.
 	public String verifyToken(@PathVariable String token) {
-
 		if (userService.verificaToken(token)) {
 
 			return "Deu certo"; // Mudar retorno.
 		}
-
 		return "Deu errado cara"; // Mudar retorno
 	}
 	
@@ -69,15 +67,14 @@ public class UserController {
 	}
 	
 	// Deletando um usuário já existente
-	/*
 	@DeleteMapping("/{email}")
 	public ResponseEntity<User> delete(@PathVariable String email) throws ServletException {
 		User user = userService.findByEmail(email);
 		if(user == null) {
 			throw new ServletException("Erro ao deletar! E-mail inexistente na base de dados.");
 		}
-		return new ResponseEntity<User>( userService.deleteByEmail(email), HttpStatus.OK);
+		userService.deleteByEmail(email);
+		return new ResponseEntity<User>(HttpStatus.OK);
 	}
-	*/
 	
 }

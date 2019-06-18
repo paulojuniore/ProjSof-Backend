@@ -62,9 +62,7 @@ public class SubjectController {
 	@PostMapping(value = "/fromList/")
 	@ResponseBody
 	public ResponseEntity<List<Subject>> createForList(@RequestBody Subject[] subjects) throws ServletException {
-
 		return new ResponseEntity<List<Subject>>( subjectService.createForList(subjects), HttpStatus.CREATED );
-
 	}
 	
 	@DeleteMapping("/{id}")

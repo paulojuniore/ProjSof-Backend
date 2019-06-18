@@ -57,7 +57,6 @@ public class UserService {
 	 */
 	private void cadastraUser(String token) {
 		User user = tokens.get(token);
-
 		if (user != null) {
 			userDAO.save(user);
 		}
@@ -78,11 +77,9 @@ public class UserService {
 		return userDAO.findByEmail(login);
 	}
 	
-	/*
 	public void deleteByEmail(String email) {
 		userDAO.deleteByEmail(email);
 	}
-	*/
 	
 	public List<User> list() {
 		return this.userDAO.findAll();
