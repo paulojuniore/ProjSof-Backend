@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,11 +22,12 @@ public class Profile {
 	private long id;
 	
 	@Column
-	@ElementCollection(targetClass=User.class)
+	@ElementCollection(targetClass=Profile.class)
+	@ManyToMany
 	private List<User> likes;
 
 	@Column
-	@ElementCollection(targetClass=User.class)
+	@ElementCollection(targetClass=Profile.class)
 	private List<User> deslikes;
 	
 	public Profile() {

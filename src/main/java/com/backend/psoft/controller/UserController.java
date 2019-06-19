@@ -12,7 +12,7 @@ import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RestController
 public class UserController {
 	

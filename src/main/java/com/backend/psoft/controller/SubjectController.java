@@ -23,7 +23,7 @@ import com.backend.psoft.service.SubjectService;
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
  */
-@RequestMapping("/subject")
+@RequestMapping("/subjects")
 @RestController
 public class SubjectController {
 	
