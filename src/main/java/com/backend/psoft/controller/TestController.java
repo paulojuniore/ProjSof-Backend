@@ -17,8 +17,6 @@ public class TestController {
         return "ola";
     }
 
-
-
     @Autowired
     //pivate JavaMailSender mailSender;
     private  EnviaEmail enviaEmail;

@@ -12,7 +12,7 @@ import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
-@RequestMapping("/users")
+@RequestMapping("/user")
 @RestController
 public class UserController {
 	
@@ -43,7 +43,6 @@ public class UserController {
 	@GetMapping(value = "/verify/{token}") // Apagar os token depois.
 	public String verifyToken(@PathVariable String token) {
 		if (userService.verificaToken(token)) {
-
 			return "Deu certo"; // Mudar retorno.
 		}
 		return "Deu errado cara"; // Mudar retorno
