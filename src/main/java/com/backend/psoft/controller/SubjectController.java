@@ -40,7 +40,7 @@ public class SubjectController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Subject> getUser(@PathVariable long id) throws ServletException {
+	public ResponseEntity<Subject> getSubject(@PathVariable long id) throws ServletException {
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {
 			throw new ServletException("Disciplina inexistente na base de dados.");
