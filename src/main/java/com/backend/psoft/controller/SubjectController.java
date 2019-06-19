@@ -39,6 +39,17 @@ public class SubjectController {
 		return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
 	}
 	
+	/** 
+	 * @author Hércules Rodrigues - herculesra - 117210908
+	 * 
+	 * Rota para retornar todas as disciplinas referentes à sub string recebida no request.
+	*/
+	@GetMapping("/search/{subString}")
+	public ResponseEntity<List<Subject>> getBySubString(@PathVariable String subString) throws ServletException{
+		List<Subject> subjects = subjectService.getSubjectBySubString(subString);
+		return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Subject> getSubject(@PathVariable long id) throws ServletException {
 		Subject subject = subjectService.findById(id);

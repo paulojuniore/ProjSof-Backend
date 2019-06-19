@@ -26,5 +26,12 @@ public interface SubjectDAO extends JpaRepository<Subject, Long> {
 	
 	@Query(value="Select n from Subject n where n.subjectName=:pname")
 	Subject findBySubjectName(@Param("pname") String name);
-	
+
+	/**
+	 * @author Hércules Rodrigues
+	 * @param subString
+	 * @return Lista de disciplinas iniciadas com a subString 
+	 */
+	@Query(value="SELECT s FROM Subject s WHERE s.subjectName LIKE %:psubString%")
+	List<Subject> getSubjectBySubString(@Param("psubString") String subString);
 }

@@ -5,7 +5,6 @@ import com.backend.psoft.model.Subject;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,10 +17,18 @@ public class SubjectService {
 	
 	private final SubjectDAO subjectDAO;
 	
+	
 	public SubjectService(SubjectDAO subjectDAO) {
 		this.subjectDAO = subjectDAO;
 	}
-	
+	/**
+	 * @author Hércules Rodrigues
+	 */
+	public List<Subject> getSubjectBySubString(String subString){
+		String upString = subString.toUpperCase();
+		return subjectDAO.getSubjectBySubString(upString);
+	}
+
 	public Subject findById(long id) {
 		return this.subjectDAO.findById(id);
 	}
