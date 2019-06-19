@@ -71,6 +71,7 @@ public class SubjectController {
 		if(subject == null) {
 			throw new ServletException("Erro ao deletar! Disciplina inexistente na base de dados.");
 		}
+		subjectService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
