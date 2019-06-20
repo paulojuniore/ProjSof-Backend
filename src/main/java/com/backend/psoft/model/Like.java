@@ -1,5 +1,7 @@
 package com.backend.psoft.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,27 +9,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "like")
-public class Like {
-	
+@Table(name = "likes")
+public class Like implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String user_id;
+	private long user_id;
 	
-	private long subject_id;
-	
-	private String like_type;
+	private boolean like_type;
 	
 	public Like() {
 		
 	}
 	
-	public Like(long id, String user_id, long subject_id, String like_type) {
+	public Like(long id, long user_id, boolean like_type) {
 		this.id = id;
 		this.user_id = user_id;
-		this.subject_id = subject_id;
 		this.like_type = like_type;
 	}
 
@@ -38,28 +39,20 @@ public class Like {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public String getUser_id() {
+	
+	public long getUser_id() {
 		return user_id;
 	}
-
-	public void setUser_id(String user_id) {
+	
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 
-	public long getSubject_id() {
-		return subject_id;
-	}
-
-	public void setSubject_id(long subject_id) {
-		this.subject_id = subject_id;
-	}
-
-	public String getLike_type() {
+	public boolean getLike_type() {
 		return like_type;
 	}
 
-	public void setLike_type(String like_type) {
+	public void setLike_type(boolean like_type) {
 		this.like_type = like_type;
 	}
 
