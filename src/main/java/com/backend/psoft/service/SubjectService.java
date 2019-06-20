@@ -21,6 +21,7 @@ public class SubjectService {
 	public SubjectService(SubjectDAO subjectDAO) {
 		this.subjectDAO = subjectDAO;
 	}
+	
 	/**
 	 * @author Hércules Rodrigues
 	 */
@@ -42,7 +43,6 @@ public class SubjectService {
 	}
 
 	public List<Subject> createForList(Subject[] arrayDisciplinas) throws ServletException{
-
 		for (int i = 0; i < arrayDisciplinas.length; i++){
 			Subject sub = subjectDAO.findBySubjectName(arrayDisciplinas[i].getSubjectName());
 			if (sub == null) {
