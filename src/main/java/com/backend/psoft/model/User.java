@@ -1,7 +1,11 @@
 package com.backend.psoft.model;
 
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,16 +26,22 @@ public class User {
 	@NotNull
 	@Size(min = 5, max = 15)
 	private String password;
+	
+	@Column
+	@ElementCollection(targetClass=Subject.class)
+	@OneToMany
+	private List<Like> likes;
 		
 	public User () {
 		
 	}
 	
-	public User (String firstName, String lastName, String email, String password) {
+	public User (String firstName, String lastName, String email, String password, List<Like> likes) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.likes = likes;
 	}
 
 	public String getFirstName() {
@@ -64,6 +74,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Like> getLikes() {
+		return likes;
+	}
+	
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
 	}
 	
 }

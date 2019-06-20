@@ -1,24 +1,25 @@
 package com.backend.psoft.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "likes")
-public class Like implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Table(name = "user_like")
+public class Like {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private long user_id;
+	@ManyToOne
+	private User user;
+	
+	@ManyToOne
+	private Subject subject;
 	
 	private boolean like_type;
 	
@@ -26,9 +27,10 @@ public class Like implements Serializable {
 		
 	}
 	
-	public Like(long id, long user_id, boolean like_type) {
+	public Like(long id, User user, Subject subject, boolean like_type) {
 		this.id = id;
-		this.user_id = user_id;
+		this.user = user;
+		this.subject = subject;
 		this.like_type = like_type;
 	}
 
@@ -40,12 +42,20 @@ public class Like implements Serializable {
 		this.id = id;
 	}
 	
-	public long getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
 	
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
+	public void setUser_id(User user) {
+		this.user = user;
+	}
+	
+	public Subject getSubject() {
+		return subject;
+	}
+	
+	public void setSubject_id(Subject subject) {
+		this.subject = subject;
 	}
 
 	public boolean getLike_type() {
