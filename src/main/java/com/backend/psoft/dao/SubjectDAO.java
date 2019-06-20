@@ -32,6 +32,6 @@ public interface SubjectDAO extends JpaRepository<Subject, Long> {
 	 * @param subString
 	 * @return Lista de disciplinas iniciadas com a subString 
 	 */
-	@Query(value="SELECT s FROM Subject s WHERE s.subjectName LIKE %:psubString%")
+	@Query(value="SELECT s.id, s.subjectName FROM Subject s WHERE s.subjectName LIKE %:psubString%")
 	List<Subject> getSubjectBySubString(@Param("psubString") String subString);
 }
