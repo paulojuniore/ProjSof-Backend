@@ -1,9 +1,13 @@
 package com.backend.psoft.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,14 +24,18 @@ public class Subject {
 	private long id;
 
 	private String subjectName;
+	
+	@OneToMany( cascade = CascadeType.ALL, orphanRemoval = true	)
+	private List<Like> likes;
 
 	public Subject() {
 		
 	}
 
-	public Subject(long id, String subjectName) {
+	public Subject(long id, String subjectName, List<Like> likes) {
 		this.id = id;
 		this.subjectName = subjectName;
+		this.setLikes(likes);
 	}
 
 	public long getId() {
@@ -44,6 +52,14 @@ public class Subject {
 
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
+	}
+
+	public List<Like> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
 	}
 
 }

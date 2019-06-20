@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +45,7 @@ public class SubjectController {
 	 * 
 	 * Rota para retornar todas as disciplinas referentes à sub string recebida no request.
 	*/
+	@CrossOrigin
 	@GetMapping("/search/{subString}")
 	public ResponseEntity<List<Subject>> getBySubString(@PathVariable String subString) throws ServletException{
 		List<Subject> subjects = subjectService.getSubjectBySubString(subString);
