@@ -7,6 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Paulo Mendes da Silva Júnior
+ *
+ */
 @Entity
 @Table(name = "user_like")
 public class Like {
@@ -21,6 +26,7 @@ public class Like {
 	@ManyToOne
 	private Subject subject;
 	
+	// like_type: 0 ou 1, "dislike" ou "like"
 	private boolean like_type;
 	
 	public Like() {
