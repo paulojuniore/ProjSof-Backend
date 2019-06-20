@@ -1,5 +1,6 @@
 package com.backend.psoft.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Subject {
 	@Column
 	@ElementCollection(targetClass=Subject.class)
 	@OneToMany
-	private List<Like> likes;
+	private List<Like> likes = new ArrayList<Like>();
 
 	public Subject() {
 		
@@ -39,6 +40,10 @@ public class Subject {
 		this.id = id;
 		this.subjectName = subjectName;
 		this.likes = likes;
+	}
+	
+	public void addLike(Like like) {
+		this.likes.add(like);
 	}
 
 	public long getId() {

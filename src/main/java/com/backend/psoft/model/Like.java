@@ -52,7 +52,7 @@ public class Like {
 		return user;
 	}
 	
-	public void setUser_id(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	
@@ -60,7 +60,7 @@ public class Like {
 		return subject;
 	}
 	
-	public void setSubject_id(Subject subject) {
+	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
 
