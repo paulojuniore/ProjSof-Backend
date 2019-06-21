@@ -19,7 +19,7 @@ public class ProjetoPsoftApplication {
 	public FilterRegistrationBean filterJwt() {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();
 		filterRb.setFilter(new TokenFilter());
-		filterRb.addUrlPatterns("/subjects/search/");
+		filterRb.addUrlPatterns("/subjects/searchId/{id}");
 		return filterRb;
 	}
 }

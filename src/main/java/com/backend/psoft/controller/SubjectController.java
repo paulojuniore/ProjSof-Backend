@@ -53,7 +53,7 @@ public class SubjectController {
 	}
 
 
-	@GetMapping("/search/{id}")
+	@GetMapping("/searchId/{id}")
 	public ResponseEntity<Subject> getSubject(@PathVariable long id) throws ServletException {
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {
