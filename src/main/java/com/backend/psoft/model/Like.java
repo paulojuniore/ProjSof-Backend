@@ -20,7 +20,7 @@ public class Like {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private String emailUser;
+	private String emailUser, nameUser;
 	private long idSubject;
 
 	// like_type: 0 ou 1, "dislike" ou "like"
@@ -30,8 +30,9 @@ public class Like {
 		
 	}
 	
-	public Like(long id, String emailUser, long idSubject, boolean like_type) {
+	public Like(long id, String emailUser, String nameUser, long idSubject, boolean like_type) {
 		this.id = id;
+		this.nameUser = nameUser;
 		this.emailUser = emailUser;
 		this.idSubject = idSubject;
 		this.like_type = like_type;
@@ -60,7 +61,15 @@ public class Like {
 	public void setIdSubject(long subjectId) {
 		this.idSubject = subjectId;
 	}
-
+	
+	public String getNameUser() {
+		return this.nameUser;
+	}
+	
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
+	}
+	
 	public boolean getLike_type() {
 		return like_type;
 	}

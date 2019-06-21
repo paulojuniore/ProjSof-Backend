@@ -32,16 +32,26 @@ public class LikeService {
 		this.likeDAO = likeDAO;
 	}
 	
-	public Like create(long subjectId, String emailUser, String option) throws ServletException {
-		 User user = userDAO.findByEmail(emailUser);
+	/*
+	 * Precisa receber um Json que contenha um like, o conteudo desse Json é
+	 * o email do usuario, o id da disciplina e o tipo de avaliação que ele deu,
+	 * True para like e False para deslike.
+	 */
+	public Like create(Like like) throws ServletException {
+		String emailUser = like.getEmailUser();
+		long subjectId = like.getIdSubject();
+		Boolean option = like.getLike_type();
+		User user = userDAO.findByEmail(emailUser);
 		Subject subject = subjectDAO.findById(subjectId);
 		if(user != null && subject != null) {
 			Like newLike = new Like();
 			newLike.setEmailUser(emailUser);
 			newLike.setIdSubject(subjectId);
-			if(option.equalsIgnoreCase("like")) {
+			String nameUser = (user.getFirstName() + " " + user.getLastName());
+			newLike.setNameUser(nameUser);
+			if(option) {
 				newLike.setLike_type(true);
-			} else if(option.equalsIgnoreCase("unlike")) {
+			} else {
 				newLike.setLike_type(false);
 			}
 			return likeDAO.save(newLike);

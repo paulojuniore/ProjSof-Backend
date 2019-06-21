@@ -11,6 +11,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/*
+ * Classe responsável por filtar Url's privados
+ * será necessário um token de autenticação para visitar
+ * essas rotas.
+ * 
+ * @author Abel Antunes de Lima 
+ *
+ */
 public class TokenFilter extends GenericFilterBean {
 
     @Override

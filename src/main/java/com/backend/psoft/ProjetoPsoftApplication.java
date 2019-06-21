@@ -1,6 +1,5 @@
 package com.backend.psoft;
 
-
 import com.backend.psoft.authentication.TokenFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +18,8 @@ public class ProjetoPsoftApplication {
 	public FilterRegistrationBean filterJwt() {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();
 		filterRb.setFilter(new TokenFilter());
-		filterRb.addUrlPatterns("/subjects/searchId/{id}");
+		//Qualquer rota que comece assim precisará de autenticacao
+		filterRb.addUrlPatterns("/subjects/search/*");
 		return filterRb;
 	}
 }
