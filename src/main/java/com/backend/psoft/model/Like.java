@@ -21,6 +21,7 @@ public class Like {
 	private long id;
 
 	private String emailUser, nameUser;
+	
 	private long idSubject;
 
 	// like_type: 0 ou 1, "dislike" ou "like"
