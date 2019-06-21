@@ -32,13 +32,13 @@ public class LikeService {
 		this.likeDAO = likeDAO;
 	}
 	
-	public Like create(long id, String email, String option) throws ServletException {
-		User user = userDAO.findByEmail(email);
-		Subject subject = subjectDAO.findById(id);
+	public Like create(long subjectId, String emailUser, String option) throws ServletException {
+		 User user = userDAO.findByEmail(emailUser);
+		Subject subject = subjectDAO.findById(subjectId);
 		if(user != null && subject != null) {
 			Like newLike = new Like();
-			newLike.setUser(user);
-			newLike.setSubject(subject);
+			newLike.setEmailUser(emailUser);
+			newLike.setIdSubject(subjectId);
 			if(option.equalsIgnoreCase("like")) {
 				newLike.setLike_type(true);
 			} else if(option.equalsIgnoreCase("unlike")) {

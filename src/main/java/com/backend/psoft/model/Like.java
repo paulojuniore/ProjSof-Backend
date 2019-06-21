@@ -19,13 +19,10 @@ public class Like {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@ManyToOne
-	private User user;
-	
-	@ManyToOne
-	private Subject subject;
-	
+
+	private String emailUser;
+	private long idSubject;
+
 	// like_type: 0 ou 1, "dislike" ou "like"
 	private boolean like_type;
 	
@@ -33,10 +30,10 @@ public class Like {
 		
 	}
 	
-	public Like(long id, User user, Subject subject, boolean like_type) {
+	public Like(long id, String emailUser, long idSubject, boolean like_type) {
 		this.id = id;
-		this.user = user;
-		this.subject = subject;
+		this.emailUser = emailUser;
+		this.idSubject = idSubject;
 		this.like_type = like_type;
 	}
 
@@ -48,20 +45,20 @@ public class Like {
 		this.id = id;
 	}
 	
-	public User getUser() {
-		return user;
+	public String getEmailUser() {
+		return emailUser;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public void setEmailUser(String emailUser) {
+		this.emailUser = emailUser;
 	}
-	
-	public Subject getSubject() {
-		return subject;
+
+	public long getIdSubject() {
+		return this.idSubject;
 	}
-	
-	public void setSubject(Subject subject) {
-		this.subject = subject;
+
+	public void setIdSubject(long subjectId) {
+		this.idSubject = subjectId;
 	}
 
 	public boolean getLike_type() {

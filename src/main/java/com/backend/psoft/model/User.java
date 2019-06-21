@@ -26,22 +26,16 @@ public class User {
 	@NotNull
 	@Size(min = 5, max = 15)
 	private String password;
-	
-	@Column
-	@ElementCollection(targetClass=Subject.class)
-	@OneToMany
-	private List<Like> likes;
 		
 	public User () {
 		
 	}
 	
-	public User (String firstName, String lastName, String email, String password, List<Like> likes) {
+	public User (String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.likes = likes;
 	}
 
 	public String getFirstName() {
@@ -76,12 +70,6 @@ public class User {
 		this.password = password;
 	}
 	
-	public List<Like> getLikes() {
-		return likes;
-	}
-	
-	public void setLikes(List<Like> likes) {
-		this.likes = likes;
-	}
+
 	
 }

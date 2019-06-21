@@ -23,7 +23,7 @@ public interface SubjectDAO extends JpaRepository<Subject, Long> {
 	
 	@Query(value="Select u from Subject u where u.id=:pid")
 	Subject findById(@Param("pid") long id);
-	
+
 	@Query(value="Select n from Subject n where n.subjectName=:pname")
 	Subject findBySubjectName(@Param("pname") String name);
 
