@@ -36,6 +36,10 @@ public class LikeService {
 	 * Precisa receber um Json que contenha um like, o conteudo desse Json é
 	 * o email do usuario, o id da disciplina e o tipo de avaliação que ele deu,
 	 * True para like e False para deslike.
+	 * 
+	 * Seu nome é pego automaticamente e armazenado no like.
+	 * 
+	 * O like já está sendo salvo na disciplina.
 	 */
 	public Like create(Like like) throws ServletException {
 		String emailUser = like.getEmailUser();
@@ -54,9 +58,17 @@ public class LikeService {
 			} else {
 				newLike.setLike_type(false);
 			}
+			
+			subject.addLike(newLike);
 			return likeDAO.save(newLike);
-		} 
-		throw new ServletException("Usuário/disciplinas inexistente(s).");
+			
+		} else if (user == null) {
+			throw new ServletException("Usuário inexistente.");	
+		} else if (subject == null) {
+			throw new ServletException("Disciplina inexistente.");
+		} else {
+			throw new ServletException("Usuário e disciplinas inexistentes.");
+		}
 	}
 	
 	public Like findById(long id) {

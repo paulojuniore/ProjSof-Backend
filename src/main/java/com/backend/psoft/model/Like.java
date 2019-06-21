@@ -30,9 +30,8 @@ public class Like {
 		
 	}
 	
-	public Like(long id, String emailUser, String nameUser, long idSubject, boolean like_type) {
+	public Like(long id, String emailUser, long idSubject, boolean like_type) {
 		this.id = id;
-		this.nameUser = nameUser;
 		this.emailUser = emailUser;
 		this.idSubject = idSubject;
 		this.like_type = like_type;
