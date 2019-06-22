@@ -19,7 +19,7 @@ public class ProjetoPsoftApplication {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();
 		filterRb.setFilter(new TokenFilter());
 		//Qualquer rota que comece assim precisará de autenticacao
-		filterRb.addUrlPatterns("/subjects/search/*");
+		filterRb.addUrlPatterns("/subjects/searchId/*");
 		return filterRb;
 	}
 }
