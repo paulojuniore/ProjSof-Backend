@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 @SpringBootApplication
 
@@ -14,6 +16,7 @@ public class ProjetoPsoftApplication {
 		SpringApplication.run(ProjetoPsoftApplication.class, args);
 	}
 
+	@CrossOrigin
 	@Bean
 	public FilterRegistrationBean filterJwt() {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();
