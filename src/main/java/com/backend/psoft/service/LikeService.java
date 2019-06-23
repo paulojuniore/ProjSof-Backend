@@ -44,7 +44,7 @@ public class LikeService {
 	public Like create(Like like) throws ServletException {
 		String emailUser = like.getEmailUser();
 		long subjectId = like.getIdSubject();
-		Boolean option = like.getLike_type();
+		long option = like.getLike_type();
 		User user = userDAO.findByEmail(emailUser);
 		Subject subject = subjectDAO.findById(subjectId);
 		if(user != null && subject != null) {
@@ -53,15 +53,13 @@ public class LikeService {
 			newLike.setIdSubject(subjectId);
 			String nameUser = (user.getFirstName() + " " + user.getLastName());
 			newLike.setNameUser(nameUser);
-			if(option) {
-				newLike.setLike_type(true);
-			} else {
-				newLike.setLike_type(false);
+			if(option == 1) {
+				newLike.setLike_type(1);
+			} else if(option == 0){
+				newLike.setLike_type(0);
 			}
-			
 			subject.addLike(newLike);
-			return likeDAO.save(newLike);
-			
+			return likeDAO.save(newLike);			
 		} else if (user == null) {
 			throw new ServletException("Usuário inexistente.");	
 		} else if (subject == null) {
