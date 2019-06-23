@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +35,8 @@ public class Comment {
 	
 	private String comment_msg;
 	
+	@Column
+	@ElementCollection(targetClass=Comment.class)
 	@OneToMany
 	private List<Comment> comment_answer = new ArrayList<Comment>();
 	
@@ -47,14 +52,22 @@ public class Comment {
 		this.comment_answer = comment_answer;
 	}
 	
+	public Comment(long id, long id_subject, String user_email, String comment_msg) {
+		this.id = id;
+		this.id_subject = id_subject;
+		this.user_email = user_email;
+		this.comment_msg = comment_msg;
+	}
+	
 	public Comment(long id_subject, String user_email, String comment_msg) {
 		this.id_subject = id_subject;
 		this.user_email = user_email;
 		this.comment_msg = comment_msg;
 	}
 	
-	public void addCommentOfAnswer(Comment comment) {
+	public Comment addCommentOfAnswer(Comment comment) {
 		this.comment_answer.add(comment);
+		return comment;
 	}
 
 	public long getId() {

@@ -1,5 +1,7 @@
 package com.backend.psoft.service;
 
+import java.util.List;
+
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +41,25 @@ public class CommentService {
 			subject.addComment(comment);
 			return commentDAO.save(comment);			
 		} else if(subject == null) {
-			throw new ServletException("Disciplina inexistente!!");			
+			throw new ServletException("Disciplina inexistente!");			
 		} else {
-			throw new ServletException("Usuário inexistente!!");
+			throw new ServletException("Usuário inexistente!");
+		}
+	}
+	
+	public Comment createCommentOfAnswer(Comment comment) throws ServletException {
+		Comment commentAux = commentDAO.findById(comment.getId());
+		Subject subject = subjectDAO.findById(comment.getId_subject());
+		User user = userDAO.findByEmail(comment.getUser_email());
+		if(commentAux != null && subject != null && user != null) {
+			System.out.println("ENTREI AQUI!!!");
+			return commentAux.addCommentOfAnswer(commentAux);
+		} else if(commentAux == null) {
+			throw new ServletException("Comentário inexistente!");
+		} else if(subject == null) {
+			throw new ServletException("Disciplina inexistente!");
+		} else {
+			throw new ServletException("Usuário inexistente!");
 		}
 	}
 	

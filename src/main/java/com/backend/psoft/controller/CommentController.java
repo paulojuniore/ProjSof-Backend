@@ -30,5 +30,10 @@ public class CommentController {
 	ResponseEntity<Comment> postComment(@RequestBody Comment comment) throws ServletException {
 		return new ResponseEntity<Comment>(commentService.create(comment), HttpStatus.CREATED);
 	}
+	
+	@PostMapping("/postCommentOfAnswer/")
+	ResponseEntity<Comment> postCommentOfAnswer(@RequestBody Comment comment) throws ServletException {
+		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(comment), HttpStatus.CREATED);
+	}
 
 }
