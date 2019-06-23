@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public class Comment {
 	
 	@Column
 	@ElementCollection(targetClass=Comment.class)
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Comment> comment_answer = new ArrayList<Comment>();
 	
 	public Comment() {

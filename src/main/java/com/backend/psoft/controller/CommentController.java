@@ -4,6 +4,8 @@ import javax.servlet.ServletException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,16 @@ public class CommentController {
 	@PostMapping("/postCommentOfAnswer/")
 	ResponseEntity<Comment> postCommentOfAnswer(@RequestBody Comment comment) throws ServletException {
 		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(comment), HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/deleteComment/{id}")
+	ResponseEntity<Comment> deleteComment(@PathVariable long id) throws ServletException {
+		Comment comment = commentService.findById(id);
+		if(comment == null) {
+			throw new ServletException("Comentário inexistente!");
+		}
+		commentService.deleteById(id);
+		return new ResponseEntity<Comment>(HttpStatus.OK);
 	}
 
 }
