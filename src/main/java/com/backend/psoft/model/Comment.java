@@ -1,14 +1,21 @@
 package com.backend.psoft.model;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Paulo Mendes da Silva Júnior - 117210922
+ *
+ */
 @Entity
 @Table(name = "comment")
 public class Comment {
@@ -17,7 +24,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private Date data;
+	private Date data = Calendar.getInstance().getTime();
 	
 	private long id_subject;
 	
@@ -25,20 +32,29 @@ public class Comment {
 	
 	private String comment_msg;
 	
-	@OneToOne
-	private Comment comment_answer;
+	@OneToMany
+	private List<Comment> comment_answer = new ArrayList<Comment>();
 	
 	public Comment() {
 		
 	}
 	
-	public Comment(long id, Date data, long id_subject, String user_email, String comment_msg, Comment comment_answer) {
+	public Comment(long id, long id_subject, String user_email, String comment_msg, List<Comment> comment_answer) {
 		this.id = id;
-		this.data = data;
 		this.id_subject = id_subject;
 		this.user_email = user_email;
 		this.comment_msg = comment_msg;
 		this.comment_answer = comment_answer;
+	}
+	
+	public Comment(long id_subject, String user_email, String comment_msg) {
+		this.id_subject = id_subject;
+		this.user_email = user_email;
+		this.comment_msg = comment_msg;
+	}
+	
+	public void addCommentOfAnswer(Comment comment) {
+		this.comment_answer.add(comment);
 	}
 
 	public long getId() {
@@ -81,11 +97,11 @@ public class Comment {
 		this.comment_msg = comment_msg;
 	}
 
-	public Comment getComment_answer() {
+	public List<Comment> getComment_answer() {
 		return comment_answer;
 	}
 
-	public void setComment_answer(Comment comment_answer) {
+	public void setComment_answer(List<Comment> comment_answer) {
 		this.comment_answer = comment_answer;
 	}
 	

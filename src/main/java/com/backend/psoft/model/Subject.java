@@ -31,19 +31,29 @@ public class Subject {
 	@ElementCollection(targetClass=Subject.class)
 	@OneToMany
 	private List<Like> likes = new ArrayList<Like>();
+	
+	@Column
+	@ElementCollection(targetClass=Subject.class)
+	@OneToMany
+	private List<Comment> comments = new ArrayList<Comment>();
 
 	public Subject() {
 		
 	}
 
-	public Subject(long id, String subjectName, List<Like> likes) {
+	public Subject(long id, String subjectName, List<Like> likes, List<Comment> comments) {
 		this.id = id;
 		this.subjectName = subjectName;
 		this.likes = likes;
+		this.comments = comments;
 	}
 	
 	public void addLike(Like like) {
 		this.likes.add(like);
+	}
+	
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
 	}
 
 	public long getId() {
@@ -68,6 +78,14 @@ public class Subject {
 	
 	public void setLikes(List<Like> likes) {
 		this.likes = likes;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+	
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }
