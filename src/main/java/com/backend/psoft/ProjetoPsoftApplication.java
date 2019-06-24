@@ -16,7 +16,6 @@ public class ProjetoPsoftApplication {
 		SpringApplication.run(ProjetoPsoftApplication.class, args);
 	}
 
-	@CrossOrigin
 	@Bean
 	public FilterRegistrationBean filterJwt() {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();

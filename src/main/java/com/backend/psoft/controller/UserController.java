@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
