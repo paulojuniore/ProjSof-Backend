@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Enumeration;
 
 /*
  * Classe responsável por filtar Url's privados
@@ -25,8 +26,13 @@ public class TokenFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        HttpServletRequest req = (HttpServletRequest) request;
-        String header = req.getHeader("Authorization");
+        String header = ((HttpServletRequest) request).getHeader("Authorization");
+
+        System.out.println(header);
+
+
+
+
 
         if (header == null || !header.startsWith("Bearer")) {
             throw new ServletException("Token inexistente ou mal formatado!");

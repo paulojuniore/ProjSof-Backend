@@ -45,6 +45,7 @@ public class SubjectController {
 	 * 
 	 * Rota para retornar todas as disciplinas referentes à sub string recebida no request.
 	*/
+
 	@CrossOrigin
 	@GetMapping("/search/{subString}")
 	public ResponseEntity<List<Subject>> getBySubString(@PathVariable String subString) throws ServletException{
@@ -73,6 +74,7 @@ public class SubjectController {
 	}
 
 	// Metodo que efetua o cadastro das disciplinas atravez de um array de disciplinas
+	// Abel Antunes de Lima Neto
 	@PostMapping(value = "/fromList/")
 	@ResponseBody
 	public ResponseEntity<List<Subject>> createForList(@RequestBody Subject[] subjects) throws ServletException {
