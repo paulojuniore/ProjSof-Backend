@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
+import io.swagger.annotations.Api;
+
+@Api(value = "users", description = "Responsável por controlar atividades relacionadas a um usuário.")
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -54,15 +57,6 @@ public class UserController {
 	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
 		userService.create(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
-
-	// Foi necessário gerar essa rota para consertar um bug que estava havendo no POST quando
-	// usava a rota sem a / no final.
-	@CrossOrigin
-	@PostMapping(value = "")
-	@ResponseBody
-	public void createError(@RequestBody User user) throws ServletException {
-		throw new ServletException("Url invalida para cadastro.");
 	}
 	
 	// Deletando um usuário já existente
