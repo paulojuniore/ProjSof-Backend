@@ -48,9 +48,44 @@ public class Subject {
 		this.likes = likes;
 		this.comments = comments;
 	}
-	
+
+	/*
+	 * Abel Antunes de Lima Neto - 117210287
+	 * Ao receber um like analisa se um usuario ainda nao deu like ou se
+	 * esta mudando o tipo de like que foi dado.
+	 */
 	public void addLike(Like like) {
-		this.likes.add(like);
+		String email = like.getEmailUser();
+		Like likenInList = getLike(email);
+
+		if (likenInList == null) {
+			this.likes.add(like);
+		}
+		else if (likenInList.getLike_type() == like.getLike_type()) {
+			this.likes.remove(likenInList);
+		}
+		else {
+			likenInList.setLike_type(like.getLike_type());
+		}
+
+	}
+
+	private Like getLike(String email) {
+
+		int count = 0;
+		Like retorno = null;
+		Boolean naoAchou = true;
+		while (this.likes.size() > count && naoAchou) {
+			Like like = this.likes.get(count);
+			if (like.getEmailUser().equals(email)){
+				retorno = like;
+				naoAchou = false;
+			}
+
+			count ++;
+		}
+
+		return retorno;
 	}
 	
 	public void addComment(Comment comment) {

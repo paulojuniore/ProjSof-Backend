@@ -35,11 +35,13 @@ public class LikeService {
 	/*
 	 * Precisa receber um Json que contenha um like, o conteudo desse Json é
 	 * o email do usuario, o id da disciplina e o tipo de avaliação que ele deu,
-	 * True para like e False para deslike.
+	 * 1 para like e -1 para deslike.
 	 * 
 	 * Seu nome é pego automaticamente e armazenado no like.
 	 * 
 	 * O like já está sendo salvo na disciplina.
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
 	 */
 	public Like create(Like like) throws ServletException {
 		String emailUser = like.getEmailUser();
@@ -54,7 +56,7 @@ public class LikeService {
 			String nameUser = (user.getFirstName() + " " + user.getLastName());
 			newLike.setNameUser(nameUser);
 
-			// Likes podem vim com -1, 0 ou 1
+			// Likes podem vim com -1 ou 1
 			if(option == 1) {
 				newLike.setLike_type(1);
 			} else if(option == -1){

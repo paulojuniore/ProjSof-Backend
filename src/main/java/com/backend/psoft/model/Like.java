@@ -24,7 +24,7 @@ public class Like {
 	
 	private long idSubject;
 
-	// like_type: 0, 1 ou -1: 0 = dislike, 1 = like, 0 = nenhum
+	// like_type: 1 ou -1: 0 = dislike, 1 = like
 	private Integer like_type;
 	
 	public Like() {
