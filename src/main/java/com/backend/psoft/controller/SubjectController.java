@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.service.SubjectService;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
@@ -34,6 +36,7 @@ public class SubjectController {
 		this.subjectService = subjectService;
 	}
 	
+	@ApiOperation(value = "Exibe todas as disciplinas da base de dados.")
 	@GetMapping("/")
 	public ResponseEntity<List<Subject>> listAll() {
 		List<Subject> subjects = subjectService.list();
@@ -48,6 +51,7 @@ public class SubjectController {
 
 	@CrossOrigin
 	@GetMapping("/search/{subString}")
+	@ApiOperation(value = "Procura por disciplina(s) a partir de uma substring.")
 	public ResponseEntity<List<Subject>> getBySubString(@PathVariable String subString) throws ServletException{
 		List<Subject> subjects = subjectService.getSubjectBySubString(subString);
 		return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
@@ -55,6 +59,7 @@ public class SubjectController {
 
 	@CrossOrigin
 	@GetMapping("/searchId/{id}")
+	@ApiOperation(value = "Obtém os dados de uma disciplina a partir do seu identificador único.")
 	public ResponseEntity<Subject> getSubject(@PathVariable long id) throws ServletException {
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {
@@ -65,6 +70,7 @@ public class SubjectController {
 	
 	@PostMapping(value = "/")
 	@ResponseBody
+	@ApiOperation(value = "Cadastra uma nova disciplina.")
 	public ResponseEntity<Subject> create(@RequestBody Subject subject) throws ServletException {
 		Subject verifier = subjectService.findByName(subject.getSubjectName());
 		if(verifier == null) {
@@ -77,11 +83,13 @@ public class SubjectController {
 	// Abel Antunes de Lima Neto
 	@PostMapping(value = "/fromList/")
 	@ResponseBody
+	@ApiOperation(value = "Cadastra todas as disciplinas do UCDB em uma única requisição.")
 	public ResponseEntity<List<Subject>> createForList(@RequestBody Subject[] subjects) throws ServletException {
 		return new ResponseEntity<List<Subject>>( subjectService.createForList(subjects), HttpStatus.CREATED );
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Deleta uma disciplina da base de dados a partir do seu identificador.")
 	public ResponseEntity<Subject> delete(@PathVariable long id) throws ServletException {
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {

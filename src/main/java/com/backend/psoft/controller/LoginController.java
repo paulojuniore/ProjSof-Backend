@@ -12,6 +12,7 @@ import com.backend.psoft.service.UserService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.swagger.annotations.ApiOperation;
 
 @RequestMapping("/auth")
 @RestController
@@ -24,6 +25,7 @@ public class LoginController {
 
 	@CrossOrigin
 	@PostMapping("/login")
+	@ApiOperation(value = "Efetua o login/autenticação de um usuário.")
 	public LoginResponse authenticate(@RequestBody User user) throws ServletException {
 		// Recupera o usuário
 		User authUser = userService.findByEmail(user.getEmail());

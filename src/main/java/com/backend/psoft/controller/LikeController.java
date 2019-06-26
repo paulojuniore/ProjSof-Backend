@@ -16,6 +16,8 @@ import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.LikeService;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
@@ -32,6 +34,7 @@ public class LikeController {
 	}
 	
 	@PostMapping("/setLike/")
+	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")
 	ResponseEntity<Like> create(@RequestBody Like like) throws ServletException {
 		return new ResponseEntity<Like>(likeService.create(like), HttpStatus.OK);
 	}

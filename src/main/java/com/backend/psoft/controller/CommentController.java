@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.psoft.model.Comment;
 import com.backend.psoft.service.CommentService;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
@@ -29,6 +31,7 @@ public class CommentController {
 	}
 	
 	@PostMapping("/postComment/")
+	@ApiOperation(value = "Posta um comentário em uma disciplina.")
 	ResponseEntity<Comment> postComment(@RequestBody Comment comment) throws ServletException {
 		return new ResponseEntity<Comment>(commentService.create(comment), HttpStatus.CREATED);
 	}
@@ -41,6 +44,7 @@ public class CommentController {
 	*/
 	
 	@DeleteMapping("/deleteComment/{id}")
+	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")
 	ResponseEntity<Comment> deleteComment(@PathVariable long id) throws ServletException {
 		Comment comment = commentService.findById(id);
 		if(comment == null) {

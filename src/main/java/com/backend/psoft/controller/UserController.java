@@ -12,8 +12,8 @@ import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
-@Api(value = "users", description = "Responsável por controlar atividades relacionadas a um usuário.")
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -24,12 +24,14 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@ApiOperation(value = "Exibe todos os usuários cadastrados na base de dados.")
 	@GetMapping("/")
 	public ResponseEntity<List<User>> listAll() {
 		List<User> users = userService.list();
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Pesquisa se um determinado email de usuário encontra-se cadastrado na base de dados.")
 	@GetMapping(value = "/{email}")
 	public ResponseEntity<User> getUser(@PathVariable String email) throws ServletException {
 		User user = userService.findByEmail(email);
@@ -42,6 +44,7 @@ public class UserController {
 	/*
 	 * Caminho que verifica um token e confirma o cadastro de um usuário
 	 */
+	@ApiOperation(value = "Verifica se o token que foi passado ao fazer cadastro é valido.")
 	@GetMapping(value = "/verify/{token}") // Apagar os token depois.
 	public String verifyToken(@PathVariable String token) {
 		if (userService.verificaToken(token)) {
@@ -54,12 +57,14 @@ public class UserController {
 	@CrossOrigin
 	@PostMapping(value = "/")
 	@ResponseBody
+	@ApiOperation(value = "Cadastra um novo usuário na base de dados.")
 	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
 		userService.create(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	// Deletando um usuário já existente
+	@ApiOperation(value = "Remove um usuário que encontra-se cadastrado a partir do seu email.")
 	@DeleteMapping("/{email}")
 	public ResponseEntity<User> delete(@PathVariable String email) throws ServletException {
 		User user = userService.findByEmail(email);
