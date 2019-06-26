@@ -44,7 +44,7 @@ public class LikeService {
 	public Like create(Like like) throws ServletException {
 		String emailUser = like.getEmailUser();
 		long subjectId = like.getIdSubject();
-		long option = like.getLike_type();
+		Integer option = like.getLike_type();
 		User user = userDAO.findByEmail(emailUser);
 		Subject subject = subjectDAO.findById(subjectId);
 		if(user != null && subject != null) {
@@ -53,10 +53,12 @@ public class LikeService {
 			newLike.setIdSubject(subjectId);
 			String nameUser = (user.getFirstName() + " " + user.getLastName());
 			newLike.setNameUser(nameUser);
+
+			// Likes podem vim com -1, 0 ou 1
 			if(option == 1) {
 				newLike.setLike_type(1);
-			} else if(option == 0){
-				newLike.setLike_type(0);
+			} else if(option == -1){
+				newLike.setLike_type(-1);
 			}
 			subject.addLike(newLike);
 			return likeDAO.save(newLike);			

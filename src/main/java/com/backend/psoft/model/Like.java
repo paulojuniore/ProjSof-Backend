@@ -25,13 +25,13 @@ public class Like {
 	private long idSubject;
 
 	// like_type: 0, 1 ou -1: 0 = dislike, 1 = like, 0 = nenhum
-	private long like_type;
+	private Integer like_type;
 	
 	public Like() {
 		
 	}
 	
-	public Like(long id, String emailUser, long idSubject, long like_type) {
+	public Like(long id, String emailUser, long idSubject, Integer like_type) {
 		this.id = id;
 		this.emailUser = emailUser;
 		this.idSubject = idSubject;
@@ -70,11 +70,11 @@ public class Like {
 		this.nameUser = nameUser;
 	}
 	
-	public long getLike_type() {
+	public Integer getLike_type() {
 		return like_type;
 	}
 
-	public void setLike_type(long like_type) {
+	public void setLike_type(Integer like_type) {
 		this.like_type = like_type;
 	}
 
