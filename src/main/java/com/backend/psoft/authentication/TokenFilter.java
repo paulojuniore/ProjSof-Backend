@@ -2,6 +2,7 @@ package com.backend.psoft.authentication;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
+import org.apache.tomcat.jni.Time;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -27,26 +28,22 @@ public class TokenFilter extends GenericFilterBean {
             throws IOException, ServletException {
 
         String header = ((HttpServletRequest) request).getHeader("Authorization");
-
         System.out.println(header);
 
 
+        //if (header == null || !header.startsWith("Bearer")) {
+          //  throw new ServletException("Token inexistente ou mal formatado!");
+        //}
 
+        //Extraindo apenas o token do cabecalho
+        //String token = header.substring(7);
 
+       //try {
+         //   Jwts.parser().setSigningKey("psoft").parseClaimsJws(token).getBody();
+        //} catch(SignatureException e){
+          //  throw new ServletException("Token invalido ou expirado!");
 
-        if (header == null || !header.startsWith("Bearer")) {
-            throw new ServletException("Token inexistente ou mal formatado!");
-        }
-
-        // Extraindo apenas o token do cabecalho
-        String token = header.substring(7);
-
-        try {
-            Jwts.parser().setSigningKey("psoft").parseClaimsJws(token).getBody();
-        } catch(SignatureException e){
-            throw new ServletException("Token invalido ou expirado!");
-
-        }
+       //}
 
         chain.doFilter(request, response);
     }
