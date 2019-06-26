@@ -46,7 +46,7 @@ public class CommentService {
 			throw new ServletException("Usuário inexistente!");
 		}
 	}
-	
+	/*
 	public Comment createCommentOfAnswer(Comment comment) throws ServletException {
 		Comment commentAux = commentDAO.findById(comment.getId());
 		Subject subject = subjectDAO.findById(comment.getId_subject());
@@ -62,6 +62,7 @@ public class CommentService {
 			throw new ServletException("Usuário inexistente!");
 		}
 	}
+	*/
 	
 	public Comment findById(long id) {
 		return commentDAO.findById(id);
