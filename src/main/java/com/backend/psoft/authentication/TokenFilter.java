@@ -31,19 +31,19 @@ public class TokenFilter extends GenericFilterBean {
         System.out.println(header);
 
 
-        //if (header == null || !header.startsWith("Bearer")) {
-          //  throw new ServletException("Token inexistente ou mal formatado!");
-        //}
+        if (header == null || !header.startsWith("Bearer")) {
+            throw new ServletException("Token inexistente ou mal formatado!");
+        }
 
         //Extraindo apenas o token do cabecalho
-        //String token = header.substring(7);
+        String token = header.substring(7);
 
-       //try {
-         //   Jwts.parser().setSigningKey("psoft").parseClaimsJws(token).getBody();
-        //} catch(SignatureException e){
-          //  throw new ServletException("Token invalido ou expirado!");
+       try {
+            Jwts.parser().setSigningKey("psoft").parseClaimsJws(token).getBody();
+        } catch(SignatureException e){
+            throw new ServletException("Token invalido ou expirado!");
 
-       //}
+       }
 
         chain.doFilter(request, response);
     }
