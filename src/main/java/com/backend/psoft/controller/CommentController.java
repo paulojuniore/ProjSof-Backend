@@ -36,12 +36,10 @@ public class CommentController {
 		return new ResponseEntity<Comment>(commentService.create(comment), HttpStatus.CREATED);
 	}
 	
-	/*
-	@PostMapping("/postCommentOfAnswer/")
-	ResponseEntity<Comment> postCommentOfAnswer(@RequestBody Comment comment) throws ServletException {
-		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(comment), HttpStatus.CREATED);
+	@PostMapping("/postCommentOfAnswer/{id}")
+	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment) throws ServletException {
+		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment), HttpStatus.CREATED);
 	}
-	*/
 	
 	@DeleteMapping("/deleteComment/{id}")
 	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")

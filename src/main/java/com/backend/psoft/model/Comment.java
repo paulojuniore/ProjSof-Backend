@@ -1,12 +1,20 @@
 package com.backend.psoft.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * 
@@ -29,28 +37,35 @@ public class Comment {
 	
 	private String comment_msg;
 	
-	/*
 	@Column
 	@ElementCollection(targetClass=Comment.class)
-	@ManyToMany
+	@OneToMany
 	private List<Comment> comment_answer = new ArrayList<Comment>();
-	*/
-	
+
+	@ManyToOne
+	private Comment comment_parent;
+
 	public Comment() {
 		
 	}
 	
-	public Comment(long id, long id_subject, String user_email, String comment_msg) {
+	public Comment(long id, long id_subject, String user_email, String comment_msg, List<Comment> comment_answer) {
 		this.id = id;
 		this.id_subject = id_subject;
 		this.user_email = user_email;
 		this.comment_msg = comment_msg;
+		this.comment_answer = comment_answer;
 	}
 	
 	public Comment(long id_subject, String user_email, String comment_msg) {
 		this.id_subject = id_subject;
 		this.user_email = user_email;
 		this.comment_msg = comment_msg;
+	}
+	
+	public Comment addCommentOfAnswer(Comment comment) {
+		this.comment_answer.add(comment);
+		return comment;
 	}
 	
 	public long getId() {
@@ -91,6 +106,14 @@ public class Comment {
 
 	public void setComment_msg(String comment_msg) {
 		this.comment_msg = comment_msg;
+	}
+	
+	public Comment getCommentParent() {
+		return comment_parent;
+	}
+	
+	public void setCommentParent(Comment comment) {
+		this.comment_parent = comment_parent;
 	}
 	
 }

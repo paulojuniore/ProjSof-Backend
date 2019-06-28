@@ -1,5 +1,6 @@
 package com.backend.psoft.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,14 +47,22 @@ public class CommentService {
 			throw new ServletException("Usuário inexistente!");
 		}
 	}
-	/*
-	public Comment createCommentOfAnswer(Comment comment) throws ServletException {
-		Comment commentAux = commentDAO.findById(comment.getId());
+	
+	public Comment createCommentOfAnswer(long id, Comment comment) throws ServletException {
+		Comment commentAux = commentDAO.findById(id);
 		Subject subject = subjectDAO.findById(comment.getId_subject());
 		User user = userDAO.findByEmail(comment.getUser_email());
 		if(commentAux != null && subject != null && user != null) {
 			System.out.println("ENTREI AQUI!!!");
-			return commentAux.addCommentOfAnswer(commentAux);
+			comment.setCommentParent(commentAux);
+			comment.setData(new Date());
+			comment.setUser_email(user.getEmail());
+			comment.setId_subject(subject.getId());
+
+			commentAux.addCommentOfAnswer(commentAux);
+			commentDAO.save(commentAux);
+			
+			return commentDAO.save(comment);
 		} else if(commentAux == null) {
 			throw new ServletException("Comentário inexistente!");
 		} else if(subject == null) {
@@ -62,7 +71,6 @@ public class CommentService {
 			throw new ServletException("Usuário inexistente!");
 		}
 	}
-	*/
 	
 	public Comment findById(long id) {
 		return commentDAO.findById(id);
