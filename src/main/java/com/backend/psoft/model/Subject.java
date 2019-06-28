@@ -88,6 +88,26 @@ public class Subject {
 		return retorno;
 	}
 	
+	public int countNoLikes() {
+		int contaLikes = 0;
+		for (Like like : this.likes) {
+			if(like.getLike_type().equals(1)) {
+				contaLikes++;
+			}
+		}
+		return contaLikes;
+	}
+	
+	public int countNoUnlikes() {
+		int contaUnlikes = 0;
+		for (Like like : this.likes) {
+			if(like.getLike_type().equals(-1)) {
+				contaUnlikes++;
+			}
+		}
+		return contaUnlikes;
+	}
+	
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}

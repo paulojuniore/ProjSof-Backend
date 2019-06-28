@@ -48,7 +48,6 @@ public class SubjectController {
 	 * 
 	 * Rota para retornar todas as disciplinas referentes à sub string recebida no request.
 	*/
-
 	@CrossOrigin
 	@GetMapping("/search/{subString}")
 	@ApiOperation(value = "Procura por disciplina(s) a partir de uma substring.")
