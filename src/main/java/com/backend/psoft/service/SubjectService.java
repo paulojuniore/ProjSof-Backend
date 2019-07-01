@@ -1,7 +1,10 @@
 package com.backend.psoft.service;
 
 import com.backend.psoft.dao.SubjectDAO;
+import com.backend.psoft.model.Like;
 import com.backend.psoft.model.Subject;
+import com.backend.psoft.model.SubjectPerfil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
@@ -14,7 +17,8 @@ import java.util.List;
  */
 @Service
 public class SubjectService {
-	
+
+	@Autowired
 	private final SubjectDAO subjectDAO;
 	
 	
@@ -56,7 +60,25 @@ public class SubjectService {
 		}
 		return this.subjectDAO.findAll();
 	}
-	
+
+	public SubjectPerfil getPerfilSubject(long id, String emailUser) {
+
+		SubjectPerfil ret = new SubjectPerfil();
+		Subject subject = findById(id);
+
+		ret.setComments(subject.getComments());
+		ret.setId(id);
+		ret.setLikes(subject.getLikes());
+		ret.setName(subject.getSubjectName());
+		Like likeUser = subject.getLike(emailUser);
+		if(likeUser == null) {
+			ret.setAlvalUser(0);
+		} else {
+			ret.setAlvalUser(likeUser.getLike_type());
+		}
+		return ret;
+	}
+
 	public List<Subject> list() {
 		return this.subjectDAO.findAll();
 	}

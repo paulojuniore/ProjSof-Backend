@@ -31,7 +31,7 @@ public class VerificaCadastro {
         String token = Jwts.builder()
                 .setSubject(email)
                 .signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
-                .setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 50 * 60 * 1000))
                 .compact();
 
         return token;

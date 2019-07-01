@@ -3,18 +3,14 @@ package com.backend.psoft.controller;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
+import com.backend.psoft.model.SubjectPerfil;
+import com.backend.psoft.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.service.SubjectService;
@@ -29,7 +25,10 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/subjects")
 @RestController
 public class SubjectController {
-	
+
+	@Autowired
+	private LoginService loginService;
+	@Autowired
 	private SubjectService subjectService;
 	
 	public SubjectController(SubjectService subjectService) {
@@ -59,12 +58,20 @@ public class SubjectController {
 	@CrossOrigin
 	@GetMapping("/searchId/{id}")
 	@ApiOperation(value = "Obtém os dados de uma disciplina a partir do seu identificador único.")
-	public ResponseEntity<Subject> getSubject(@PathVariable long id) throws ServletException {
+	public ResponseEntity<SubjectPerfil> getSubject(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException {
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {
 			throw new ServletException("Disciplina inexistente na base de dados.");
 		}
-		return new ResponseEntity<Subject>(subject, HttpStatus.OK);
+
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+
+		if(emailUser == null) {
+			throw new ServletException("Usuario não logado.");
+		}
+
+		SubjectPerfil ret = subjectService.getPerfilSubject(id, emailUser);
+		return new ResponseEntity<SubjectPerfil>(ret, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/")

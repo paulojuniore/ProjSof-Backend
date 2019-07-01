@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.ServletException;
 
+import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,10 @@ import io.swagger.annotations.ApiOperation;
 public class LoginController {
 	
 	private final String TOKEN_KEY = "psoft";
-	
+
+	@Autowired
+	private LoginService loginService;
+
 	@Autowired
 	private UserService userService;
 
@@ -42,9 +46,9 @@ public class LoginController {
 		String token = Jwts.builder()
 				.setSubject(authUser.getEmail())
 				.signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
-				.setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
+				.setExpiration(new Date(System.currentTimeMillis() + 50 * 60 * 1000))
 				.compact();
-		
+		loginService.addLogin(authUser.getEmail(), token);
 		return new LoginResponse(token);
 	}
 
@@ -65,5 +69,6 @@ public class LoginController {
 			this.token = token;
 		}
 	}
-	
+
+
 }
