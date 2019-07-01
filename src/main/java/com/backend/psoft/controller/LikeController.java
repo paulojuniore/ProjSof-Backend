@@ -33,7 +33,8 @@ public class LikeController {
 	public LikeController(LikeService likeService) {
 		this.likeService = likeService;
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/setLike/")
 	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")
 	ResponseEntity<LikeResponse> create(@RequestBody Like like, @RequestHeader(value = "Authorization") String token) throws ServletException {

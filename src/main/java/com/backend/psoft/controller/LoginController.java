@@ -46,7 +46,7 @@ public class LoginController {
 		String token = Jwts.builder()
 				.setSubject(authUser.getEmail())
 				.signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
-				.setExpiration(new Date(System.currentTimeMillis() + 50 * 60 * 1000))
+				.setExpiration(new Date(System.currentTimeMillis() + 300 * 60 * 1000))
 				.compact();
 		loginService.addLogin(authUser.getEmail(), token);
 		return new LoginResponse(token);
