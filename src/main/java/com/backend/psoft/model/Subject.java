@@ -1,11 +1,7 @@
 package com.backend.psoft.model;
 
-import io.swagger.models.auth.In;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -59,14 +55,11 @@ public class Subject implements Comparable {
 	public void addLike(Like like) {
 		String email = like.getEmailUser();
 		Like likenInList = getLike(email);
-
 		if (likenInList == null) {
 			this.likes.add(like);
-		}
-		else if (likenInList.getLike_type() == like.getLike_type()) {
+		} else if (likenInList.getLike_type() == like.getLike_type()) {
 			this.likes.remove(likenInList);
-		}
-		else {
+		} else {
 			likenInList.setLike_type(like.getLike_type());
 		}
 
@@ -78,13 +71,9 @@ public class Subject implements Comparable {
 	public int compareToLikes(Subject sub) {
 		if (this.countNoLikes() < sub.countNoLikes()) {
 			return -1;
-		}
-
-		else if (this.countNoLikes() > sub.countNoLikes()) {
+		} else if (this.countNoLikes() > sub.countNoLikes()) {
 			return 1;
-		}
-
-		else {
+		} else {
 			return 0;
 		}
 	}
@@ -92,13 +81,9 @@ public class Subject implements Comparable {
 	public int compareToUnlikes(Subject sub) {
 		if (this.countNoUnlikes() < sub.countNoUnlikes()) {
 			return -1;
-		}
-
-		else if (this.countNoUnlikes() > sub.countNoUnlikes()) {
+		} else if (this.countNoUnlikes() > sub.countNoUnlikes()) {
 			return 1;
-		}
-
-		else {
+		} else {
 			return 0;
 		}
 	}
@@ -107,19 +92,14 @@ public class Subject implements Comparable {
 	public int compareToComents(Subject sub) {
 		if (this.getNumComents() < sub.getNumComents()) {
 			return -1;
-		}
-
-		else if (this.getNumComents() > sub.getNumComents()) {
+		} else if (this.getNumComents() > sub.getNumComents()) {
 			return 1;
-		}
-
-		else {
+		} else {
 			return 0;
 		}
 	}
 
 	public Like getLike(String email) {
-
 		int count = 0;
 		Like retorno = null;
 		Boolean naoAchou = true;
@@ -129,10 +109,8 @@ public class Subject implements Comparable {
 				retorno = like;
 				naoAchou = false;
 			}
-
 			count ++;
 		}
-
 		return retorno;
 	}
 	

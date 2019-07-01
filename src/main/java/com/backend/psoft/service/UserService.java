@@ -1,17 +1,15 @@
 package com.backend.psoft.service;
+
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.ServletException;
-
 import com.backend.psoft.util.EmailBoasVindas;
 import com.backend.psoft.util.EnviaEmail;
 import com.backend.psoft.util.Mensagem;
 import com.backend.psoft.util.VerificaCadastro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.backend.psoft.dao.UserDAO;
+import com.backend.psoft.exception.users.UserAlreadyExistsException;
 import com.backend.psoft.model.User;
 
 @Service
@@ -32,10 +30,10 @@ public class UserService {
 		this.tokens = new HashMap<String, User>();
 	}
 
-	public void create(User user) throws ServletException {
+	public void create(User user) throws UserAlreadyExistsException {
 		User u = userDAO.findByEmail(user.getEmail());
 		if (u != null) {
-			throw new ServletException("Usuário já existente!");
+			throw new UserAlreadyExistsException("Usuário já existente!");
 		} else {
 			// Envia um E-mail de boas vindas aos novos usuarios.
 			String nome = user.getFirstName() + " " + user.getLastName();
@@ -57,7 +55,6 @@ public class UserService {
 			userDAO.save(user);
 		}
 	}
-
 
 	// Método que verifica se um token é pertencente a algum usuário.
 	public Boolean verificaToken(String token) {

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.backend.psoft.exception.users.NonExistentUserException;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
@@ -33,10 +34,10 @@ public class UserController {
 	
 	@ApiOperation(value = "Pesquisa se um determinado email de usuário encontra-se cadastrado na base de dados.")
 	@GetMapping(value = "/{email}")
-	public ResponseEntity<User> getUser(@PathVariable String email) throws ServletException {
+	public ResponseEntity<User> getUser(@PathVariable String email) throws NonExistentUserException {
 		User user = userService.findByEmail(email);
 		if(user == null) {
-			throw new ServletException("Usuário inexistente na base de dados");
+			throw new NonExistentUserException("Usuário inexistente na base de dados.");
 		}
 		return new ResponseEntity<User>(userService.findByEmail(email), HttpStatus.OK);
 	}
@@ -58,7 +59,7 @@ public class UserController {
 	@PostMapping(value = "/")
 	@ResponseBody
 	@ApiOperation(value = "Cadastra um novo usuário na base de dados.")
-	public ResponseEntity<User> create(@RequestBody User user) throws ServletException {
+	public ResponseEntity<User> create(@RequestBody User user) {
 		userService.create(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -66,10 +67,10 @@ public class UserController {
 	// Deletando um usuário já existente
 	@ApiOperation(value = "Remove um usuário que encontra-se cadastrado a partir do seu email.")
 	@DeleteMapping("/{email}")
-	public ResponseEntity<User> delete(@PathVariable String email) throws ServletException {
+	public ResponseEntity<User> delete(@PathVariable String email) throws NonExistentUserException {
 		User user = userService.findByEmail(email);
 		if(user == null) {
-			throw new ServletException("Erro ao deletar! E-mail inexistente na base de dados.");
+			throw new NonExistentUserException("Erro ao deletar! E-mail inexistente na base de dados.");
 		}
 		userService.deleteByEmail(email);
 		return new ResponseEntity<User>(HttpStatus.OK);

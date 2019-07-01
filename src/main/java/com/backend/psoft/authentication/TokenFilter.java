@@ -1,8 +1,8 @@
 package com.backend.psoft.authentication;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;;
-import org.springframework.web.filter.GenericFilterBean;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureException;
+import org.springframework.web.filter.GenericFilterBean;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;

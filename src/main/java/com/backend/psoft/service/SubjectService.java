@@ -1,13 +1,12 @@
 package com.backend.psoft.service;
 
 import com.backend.psoft.dao.SubjectDAO;
+import com.backend.psoft.exception.subjects.ExistingDisciplineException;
 import com.backend.psoft.model.Like;
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.SubjectPerfil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.ServletException;
 import java.util.List;
 
 /**
@@ -46,7 +45,7 @@ public class SubjectService {
 		return this.subjectDAO.save(subject);
 	}
 
-	public List<Subject> createForList(Subject[] arrayDisciplinas) throws ServletException{
+	public List<Subject> createForList(Subject[] arrayDisciplinas) throws ExistingDisciplineException {
 		for (int i = 0; i < arrayDisciplinas.length; i++){
 			Subject sub = subjectDAO.findBySubjectName(arrayDisciplinas[i].getSubjectName());
 			if (sub == null) {
@@ -54,18 +53,15 @@ public class SubjectService {
 			} else {
 
 				String mensagem = "Erro ao cadastrar! Disciplina: " + arrayDisciplinas[i].getSubjectName() + " já cadastrada na base de dados.";
-				throw new ServletException(mensagem);
+				throw new ExistingDisciplineException(mensagem);
 			}
-
 		}
 		return this.subjectDAO.findAll();
 	}
 
 	public SubjectPerfil getPerfilSubject(long id, String emailUser) {
-
 		SubjectPerfil ret = new SubjectPerfil();
 		Subject subject = findById(id);
-
 		ret.setComments(subject.getComments());
 		ret.setId(id);
 		ret.setLikes(subject.countNoLikes());
