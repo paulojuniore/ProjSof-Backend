@@ -1,14 +1,12 @@
 package com.backend.psoft.controller;
 
 import javax.servlet.ServletException;
+
+import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.dao.UserDAO;
 import com.backend.psoft.model.Like;
@@ -26,17 +24,56 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/actions")
 @RestController
 public class LikeController {
-	
+
+	@Autowired
 	private LikeService likeService;
-	
+	@Autowired
+	private LoginService loginService;
+
 	public LikeController(LikeService likeService) {
 		this.likeService = likeService;
 	}
 	
 	@PostMapping("/setLike/")
 	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")
-	ResponseEntity<Like> create(@RequestBody Like like) throws ServletException {
-		return new ResponseEntity<Like>(likeService.create(like), HttpStatus.OK);
+	ResponseEntity<LikeResponse> create(@RequestBody Like like, @RequestHeader(value = "Authorization") String token) throws ServletException {
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+
+		if (emailUser == null) {
+			throw new ServletException("Usuário não logado.");
+		}
+
+		like.setEmailUser(emailUser);
+
+		Integer[] likesAtual = likeService.create(like);
+		LikeResponse response = new LikeResponse(likesAtual[0], likesAtual[1]);
+		return new ResponseEntity<LikeResponse>(response, HttpStatus.OK);
+	}
+
+	private class LikeResponse {
+		private Integer likes;
+		private Integer unlikes;
+
+		public LikeResponse(Integer likes, Integer unlikes) {
+			this.setLikes(likes);
+			this.setUnlikes(unlikes);
+		}
+
+		public Integer getLikes() {
+			return this.likes;
+		}
+
+		public Integer getUnlikes() {
+			return this.unlikes;
+		}
+
+		public void setLikes(Integer likes) {
+			this.likes = likes;
+		}
+
+		public void setUnlikes(Integer unlikes) {
+			this.unlikes = unlikes;
+		}
 	}
 	
 }

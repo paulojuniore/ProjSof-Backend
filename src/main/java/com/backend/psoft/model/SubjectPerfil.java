@@ -7,9 +7,10 @@ public class SubjectPerfil {
 
     private String name;
     private long id;
-    private List<Like> likes = new ArrayList<Like>();
+    private Integer likes;
+    private Integer unlikes;
     private List<Comment> comments = new ArrayList<Comment>();
-    private Integer alvalUser;
+    private Integer avalUser;
 
     public SubjectPerfil() {
 
@@ -22,16 +23,20 @@ public class SubjectPerfil {
         return name;
     }
 
-    public List<Like> getLikes() {
+    public Integer getLikes() {
         return likes;
+    }
+
+    public Integer getUnlikes() {
+        return unlikes;
     }
 
     public List<Comment> getComments() {
         return comments;
     }
 
-    public Integer getAlvalUser() {
-        return alvalUser;
+    public Integer getAvalUser() {
+        return avalUser;
     }
 
     public void setName(String name) {
@@ -42,15 +47,19 @@ public class SubjectPerfil {
         this.id = id;
     }
 
-    public void setLikes(List<Like> likes) {
+    public void setLikes(Integer likes) {
         this.likes = likes;
+    }
+
+    public void setUnlikes(Integer unlikes) {
+        this.unlikes = unlikes;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
-    public void setAlvalUser(Integer alvalUser) {
-        this.alvalUser = alvalUser;
+    public void setAvalUser(Integer avalUser) {
+        this.avalUser = avalUser;
     }
 }

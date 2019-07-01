@@ -43,7 +43,9 @@ public class LikeService {
 	 *
 	 * Abel Antunes de Lima Neto - 117210287
 	 */
-	public Like create(Like like) throws ServletException {
+	public Integer[] create(Like like) throws ServletException {
+
+		Integer[] retorno = new Integer[2];
 		String emailUser = like.getEmailUser();
 		long subjectId = like.getIdSubject();
 		Integer option = like.getLike_type();
@@ -63,7 +65,15 @@ public class LikeService {
 				newLike.setLike_type(-1);
 			}
 			subject.addLike(newLike);
-			return likeDAO.save(newLike);			
+			likeDAO.save(newLike);
+
+			Integer likes = subject.countNoLikes();
+			Integer unlikes = subject.countNoUnlikes();
+
+			retorno[0] = likes;
+			retorno[1] = unlikes;
+
+			return retorno;
 		} else if (user == null) {
 			throw new ServletException("Usuário inexistente.");	
 		} else if (subject == null) {

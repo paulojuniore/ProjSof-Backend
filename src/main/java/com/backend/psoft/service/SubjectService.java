@@ -68,13 +68,14 @@ public class SubjectService {
 
 		ret.setComments(subject.getComments());
 		ret.setId(id);
-		ret.setLikes(subject.getLikes());
+		ret.setLikes(subject.countNoLikes());
+		ret.setUnlikes(subject.countNoUnlikes());
 		ret.setName(subject.getSubjectName());
 		Like likeUser = subject.getLike(emailUser);
 		if(likeUser == null) {
-			ret.setAlvalUser(0);
+			ret.setAvalUser(0);
 		} else {
-			ret.setAlvalUser(likeUser.getLike_type());
+			ret.setAvalUser(likeUser.getLike_type());
 		}
 		return ret;
 	}

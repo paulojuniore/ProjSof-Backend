@@ -31,9 +31,8 @@ public class Like {
 		
 	}
 	
-	public Like(long id, String emailUser, long idSubject, Integer like_type) {
+	public Like(long id, long idSubject, Integer like_type) {
 		this.id = id;
-		this.emailUser = emailUser;
 		this.idSubject = idSubject;
 		this.like_type = like_type;
 	}
