@@ -24,6 +24,9 @@ public class ProjetoPsoftApplication {
 		filterRb.addUrlPatterns("/subjects/searchId/*");
 		filterRb.addUrlPatterns("/comments/*");
 		filterRb.addUrlPatterns("/actions/setLike/");
+		filterRb.addUrlPatterns("/subjects/orderByNumLikes");
+		filterRb.addUrlPatterns("/subjects/orderByNumDislikes");
+		filterRb.addUrlPatterns("/subjects/orderByNumOfComments");
 		return filterRb;
 	}
 }
