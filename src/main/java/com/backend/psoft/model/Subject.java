@@ -80,14 +80,13 @@ public class Subject implements Comparable {
 
 	public int compareToUnlikes(Subject sub) {
 		if (this.countNoUnlikes() < sub.countNoUnlikes()) {
-			return -1;
-		} else if (this.countNoUnlikes() > sub.countNoUnlikes()) {
 			return 1;
+		} else if (this.countNoUnlikes() > sub.countNoUnlikes()) {
+			return -1;
 		} else {
 			return 0;
 		}
 	}
-
 
 	public int compareToComents(Subject sub) {
 		if (this.getNumComents() < sub.getNumComents()) {

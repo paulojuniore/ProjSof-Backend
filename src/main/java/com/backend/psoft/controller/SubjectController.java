@@ -124,4 +124,10 @@ public class SubjectController {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumLikes(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/orderByNumDislikes")
+	@ApiOperation(value = "Ordena as disciplina a partir do número de dislikes que cada uma possui.")
+	public ResponseEntity<List<Subject>> orderByNumDislikes() {
+		return new ResponseEntity<List<Subject>>(subjectService.orderByNumDislikes(), HttpStatus.OK);
+	}
+	
 }

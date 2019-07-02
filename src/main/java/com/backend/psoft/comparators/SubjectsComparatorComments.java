@@ -1,7 +1,6 @@
 package com.backend.psoft.comparators;
 
 import com.backend.psoft.model.Subject;
-
 import java.util.Comparator;
 
 public class SubjectsComparatorComments implements Comparator {
@@ -11,4 +10,5 @@ public class SubjectsComparatorComments implements Comparator {
         return ((Subject)o1).
                 compareToComents(((Subject)o2));
     }
+    
 }

@@ -1,6 +1,7 @@
 package com.backend.psoft.service;
 
 import com.backend.psoft.comparators.SubjectsComparatorLikes;
+import com.backend.psoft.comparators.SubjectsComparatorUnlikes;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
 import com.backend.psoft.model.Like;
@@ -53,7 +54,6 @@ public class SubjectService {
 			if (sub == null) {
 				subjectDAO.save(arrayDisciplinas[i]);
 			} else {
-
 				String mensagem = "Erro ao cadastrar! Disciplina: " + arrayDisciplinas[i].getSubjectName() + " já cadastrada na base de dados.";
 				throw new ExistingDisciplineException(mensagem);
 			}
@@ -89,6 +89,12 @@ public class SubjectService {
 	public List<Subject> orderByNumLikes() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorLikes());
+		return subjects;
+	}
+	
+	public List<Subject> orderByNumDislikes() {
+		List<Subject> subjects = subjectDAO.findAll();
+		Collections.sort(subjects, new SubjectsComparatorUnlikes());
 		return subjects;
 	}
 
