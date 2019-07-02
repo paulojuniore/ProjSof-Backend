@@ -55,8 +55,8 @@ public class CommentController {
 	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
 	 */
 	@PostMapping("/postCommentOfAnswer/{id}")
-	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) throws ServletException {
-
+	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) 
+			throws UserOfflineException {
 		//Confirma se um usuario está logado
 		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
 		if(emailUser == null) {
@@ -65,6 +65,7 @@ public class CommentController {
 		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment, emailUser), HttpStatus.CREATED);
 	}
 	
+	/*
 	@DeleteMapping("/deleteComment/{id}")
 	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")
 	ResponseEntity<Comment> deleteComment(@PathVariable long id) throws ServletException {
@@ -72,8 +73,9 @@ public class CommentController {
 		if(comment == null) {
 			throw new ServletException("Comentário inexistente!");
 		}
-		commentService.deleteById(id);
+		// commentService.deleteById(id);
 		return new ResponseEntity<Comment>(HttpStatus.OK);
 	}
+	*/
 
 }

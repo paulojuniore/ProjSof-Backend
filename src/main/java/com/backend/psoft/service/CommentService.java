@@ -74,9 +74,5 @@ public class CommentService {
 	public Comment findById(long id) {
 		return commentDAO.findById(id);
 	}
-	
-	public void deleteById(long id) {
-		commentDAO.deleteById(id);
-	}
 
 }
