@@ -70,9 +70,9 @@ public class Subject implements Comparable {
 	 */
 	public int compareToLikes(Subject sub) {
 		if (this.countNoLikes() < sub.countNoLikes()) {
-			return -1;
-		} else if (this.countNoLikes() > sub.countNoLikes()) {
 			return 1;
+		} else if (this.countNoLikes() > sub.countNoLikes()) {
+			return -1;
 		} else {
 			return 0;
 		}
@@ -175,7 +175,9 @@ public class Subject implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
 }

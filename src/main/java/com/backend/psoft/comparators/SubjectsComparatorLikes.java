@@ -4,11 +4,10 @@ import com.backend.psoft.model.Subject;
 
 import java.util.Comparator;
 
-public class SubjectsComparatorLikes implements Comparator {
+public class SubjectsComparatorLikes implements Comparator<Subject> {
 
-    @Override
-    public int compare(Object o1, Object o2) {
-        return ((Subject)o1).
-                compareToLikes(((Subject)o2));
-    }
+	@Override
+	public int compare(Subject arg0, Subject arg1) {
+		return arg0.compareToLikes(arg1);
+	}
 }

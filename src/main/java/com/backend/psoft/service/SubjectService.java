@@ -1,5 +1,6 @@
 package com.backend.psoft.service;
 
+import com.backend.psoft.comparators.SubjectsComparatorLikes;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
 import com.backend.psoft.model.Like;
@@ -7,6 +8,7 @@ import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.SubjectProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -82,6 +84,12 @@ public class SubjectService {
 	
 	public void delete(long id) {
 		this.subjectDAO.deleteById(id);
+	}
+	
+	public List<Subject> orderByNumLikes() {
+		List<Subject> subjects = subjectDAO.findAll();
+		Collections.sort(subjects, new SubjectsComparatorLikes());
+		return subjects;
 	}
 
 }

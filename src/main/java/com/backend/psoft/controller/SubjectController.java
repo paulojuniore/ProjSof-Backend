@@ -1,5 +1,7 @@
 package com.backend.psoft.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.backend.psoft.comparators.SubjectsComparatorLikes;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
 import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
 import com.backend.psoft.exception.users.NonExistentUserException;
@@ -107,6 +110,12 @@ public class SubjectController {
 		}
 		subjectService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/orderByNumLikes")
+	@ApiOperation(value = "Ordena as disciplinas a partir do número de likes que cada uma possui.")
+	public ResponseEntity<List<Subject>> orderByNumLikes() {
+		return new ResponseEntity<List<Subject>>(subjectService.orderByNumLikes(), HttpStatus.OK);
 	}
 	
 }
