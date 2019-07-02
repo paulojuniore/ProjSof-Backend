@@ -22,7 +22,7 @@ public class ProjetoPsoftApplication {
 		//Qualquer rota que comece assim precisará de autenticacao
 		filterRb.addUrlPatterns("/subjects/searchId/*");
 		filterRb.addUrlPatterns("/comments/*");
-		filterRb.addUrlPatterns("/actions/*");
+		filterRb.addUrlPatterns("/actions/setLike/");
 		return filterRb;
 	}
 }
