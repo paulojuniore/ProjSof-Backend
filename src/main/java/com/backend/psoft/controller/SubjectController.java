@@ -1,27 +1,17 @@
 package com.backend.psoft.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
 import com.backend.psoft.model.SubjectProfile;
 import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.backend.psoft.comparators.SubjectsComparatorLikes;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
 import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
-import com.backend.psoft.exception.users.NonExistentUserException;
 import com.backend.psoft.exception.users.UserOfflineException;
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.service.SubjectService;
-
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -107,6 +97,7 @@ public class SubjectController {
 		return new ResponseEntity<List<Subject>>( subjectService.createForList(subjects), HttpStatus.CREATED );
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deleta uma disciplina da base de dados a partir do seu identificador.")
 	public ResponseEntity<Subject> delete(@PathVariable long id) throws NonExistentDisciplineException {

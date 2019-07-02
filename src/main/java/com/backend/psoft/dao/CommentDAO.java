@@ -17,6 +17,7 @@ import com.backend.psoft.model.Comment;
 @Repository
 public interface CommentDAO extends JpaRepository<Comment, Long>{
 	
+	@SuppressWarnings("unchecked")
 	Comment save(Comment comment);
 	
 	@Query(value="Select c from Comment c where c.id=:cid")

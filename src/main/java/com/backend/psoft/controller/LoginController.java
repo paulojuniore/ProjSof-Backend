@@ -1,18 +1,13 @@
 package com.backend.psoft.controller;
 
 import java.util.Date;
-
-import javax.servlet.ServletException;
-
 import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.backend.psoft.exception.login.InvalidPasswordException;
 import com.backend.psoft.exception.users.NonExistentUserException;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.ApiOperation;
@@ -60,6 +55,7 @@ public class LoginController {
 			this.setToken(token);
 		}
 
+		@SuppressWarnings("unused")
 		public String getToken() {
 			return token;
 		}

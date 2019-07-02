@@ -15,6 +15,7 @@ public class ProjetoPsoftApplication {
 		SpringApplication.run(ProjetoPsoftApplication.class, args);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
 	public FilterRegistrationBean filterJwt() {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();

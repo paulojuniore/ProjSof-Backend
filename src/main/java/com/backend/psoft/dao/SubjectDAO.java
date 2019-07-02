@@ -17,6 +17,7 @@ import com.backend.psoft.model.Subject;
 @Repository
 public interface SubjectDAO extends JpaRepository<Subject, Long> {
 	
+	@SuppressWarnings("unchecked")
 	Subject save(Subject subject);
 	
 	List<Subject> findAll();

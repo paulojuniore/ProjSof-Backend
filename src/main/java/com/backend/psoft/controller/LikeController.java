@@ -61,10 +61,12 @@ public class LikeController {
 			this.setUnlikes(unlikes);
 		}
 
+		@SuppressWarnings("unused")
 		public Integer getLikes() {
 			return this.likes;
 		}
 
+		@SuppressWarnings("unused")
 		public Integer getUnlikes() {
 			return this.unlikes;
 		}

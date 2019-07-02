@@ -14,6 +14,7 @@ import com.backend.psoft.model.Like;
 @Repository
 public interface LikeDAO extends JpaRepository<Like, Long> {
 	
+	@SuppressWarnings("unchecked")
 	Like save(Like like);
 	
 	@Query(value="Select l from Like l where l.id=:lid")

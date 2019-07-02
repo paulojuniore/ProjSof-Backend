@@ -15,6 +15,7 @@ import com.backend.psoft.model.User;
 @Repository
 public interface UserDAO extends JpaRepository<User, String> {
 	
+	@SuppressWarnings("unchecked")
 	User save(User user);
 	
 	List<User> findAll();

@@ -1,13 +1,8 @@
 package com.backend.psoft.service;
 
 import java.util.Date;
-import java.util.List;
-
-import javax.servlet.ServletException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.backend.psoft.dao.CommentDAO;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.dao.UserDAO;

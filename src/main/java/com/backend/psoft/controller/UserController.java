@@ -1,18 +1,12 @@
 package com.backend.psoft.controller;
 
 import java.util.List;
-
-import javax.servlet.ServletException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.backend.psoft.exception.users.NonExistentUserException;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
-
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RequestMapping("/users")
