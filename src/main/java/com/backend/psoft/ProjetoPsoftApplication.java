@@ -21,8 +21,6 @@ public class ProjetoPsoftApplication {
 		filterRb.setFilter(new TokenFilter());
 		//Qualquer rota que comece assim precisará de autenticacao
 		filterRb.addUrlPatterns("/subjects/searchId/*");
-		filterRb.addUrlPatterns("/comments/*");
-		filterRb.addUrlPatterns("/actions/setLike/");
 		return filterRb;
 	}
 }
