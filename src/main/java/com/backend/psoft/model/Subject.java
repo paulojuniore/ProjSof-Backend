@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="subjects")
-public class Subject implements Comparable {
+public class Subject {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,9 +90,9 @@ public class Subject implements Comparable {
 
 	public int compareToComents(Subject sub) {
 		if (this.getNumComents() < sub.getNumComents()) {
-			return -1;
-		} else if (this.getNumComents() > sub.getNumComents()) {
 			return 1;
+		} else if (this.getNumComents() > sub.getNumComents()) {
+			return -1;
 		} else {
 			return 0;
 		}
@@ -171,12 +171,6 @@ public class Subject implements Comparable {
 	
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
-	}
-
-	@Override
-	public int compareTo(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

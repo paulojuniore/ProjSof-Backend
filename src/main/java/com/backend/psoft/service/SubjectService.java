@@ -1,5 +1,6 @@
 package com.backend.psoft.service;
 
+import com.backend.psoft.comparators.SubjectsComparatorComments;
 import com.backend.psoft.comparators.SubjectsComparatorLikes;
 import com.backend.psoft.comparators.SubjectsComparatorUnlikes;
 import com.backend.psoft.dao.SubjectDAO;
@@ -95,6 +96,12 @@ public class SubjectService {
 	public List<Subject> orderByNumDislikes() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorUnlikes());
+		return subjects;
+	}
+	
+	public List<Subject> orderByNumOfComments() {
+		List<Subject> subjects = subjectDAO.findAll();
+		Collections.sort(subjects, new SubjectsComparatorComments());
 		return subjects;
 	}
 
