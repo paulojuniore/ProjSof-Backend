@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
  */
+@CrossOrigin
 @RequestMapping("/actions")
 @RestController
 public class LikeController {
@@ -35,7 +36,6 @@ public class LikeController {
 	 *
 	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
 	 */
-	@CrossOrigin
 	@PostMapping("/setLike/")
 	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")
 	ResponseEntity<LikeResponse> create(@RequestBody Like like, @RequestHeader(value = "Authorization") String token) 
