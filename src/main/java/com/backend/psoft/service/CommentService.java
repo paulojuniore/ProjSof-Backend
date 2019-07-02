@@ -57,16 +57,13 @@ public class CommentService {
 		Subject subject = subjectDAO.findById(comment.getId_subject());
 		User user = userDAO.findByEmail(comment.getUser_email());
 		if(commentAux != null && subject != null && user != null) {
-			System.out.println("ENTREI AQUI!!!");
-			comment.setCommentParent(commentAux);
+			comment.setCommentParent(id);
 			comment.setData(new Date());
 			comment.setUser_email(user.getEmail());
 			comment.setId_subject(subject.getId());
-
-			commentAux.addCommentOfAnswer(commentAux);
-			commentDAO.save(commentAux);
-			
+			commentAux.addCommentResp(comment);
 			return commentDAO.save(comment);
+
 		} else if(commentAux == null) {
 			throw new CommentParentInexistentException("Comentário inexistente!");
 		} else if(subject == null) {

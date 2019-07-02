@@ -36,36 +36,32 @@ public class Comment {
 	private String user_email;
 	
 	private String comment_msg;
-	
-	@Column
-	@ElementCollection(targetClass=Comment.class)
-	@OneToMany
-	private List<Comment> comment_answer = new ArrayList<Comment>();
 
-	@ManyToOne
-	private Comment comment_parent;
+	private long comment_parent;
+
+	@Column
+	@ElementCollection(targetClass=Subject.class)
+	@OneToMany
+	private List<Comment> comments_resp;
 
 	public Comment() {
 		
 	}
 	
-	public Comment(long id, long id_subject, String user_email, String comment_msg, List<Comment> comment_answer) {
+	public Comment(long id, long id_subject, String user_email, String comment_msg, long comment_parent) {
 		this.id = id;
 		this.id_subject = id_subject;
 		this.user_email = user_email;
 		this.comment_msg = comment_msg;
-		this.comment_answer = comment_answer;
+		this.comment_parent = comment_parent;
+		this.comments_resp = new ArrayList<Comment>();
 	}
 	
 	public Comment(long id_subject, String user_email, String comment_msg) {
 		this.id_subject = id_subject;
 		this.user_email = user_email;
 		this.comment_msg = comment_msg;
-	}
-	
-	public Comment addCommentOfAnswer(Comment comment) {
-		this.comment_answer.add(comment);
-		return comment;
+		this.comments_resp = new ArrayList<Comment>();
 	}
 	
 	public long getId() {
@@ -108,12 +104,20 @@ public class Comment {
 		this.comment_msg = comment_msg;
 	}
 	
-	public Comment getCommentParent() {
+	public long getCommentParent() {
 		return comment_parent;
 	}
 	
-	public void setCommentParent(Comment comment) {
-		this.comment_parent = comment_parent;
+	public void setCommentParent(long commentId) {
+		this.comment_parent = commentId;
+	}
+
+	public List<Comment> getComments_resp () {
+		return this.comments_resp;
+	}
+
+	public void addCommentResp (Comment resp) {
+		this.comments_resp.add(resp);
 	}
 	
 }
