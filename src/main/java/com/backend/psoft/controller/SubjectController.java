@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.backend.psoft.model.SubjectPerfil;
+import com.backend.psoft.model.SubjectProfile;
 import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +32,7 @@ public class SubjectController {
 
 	@Autowired
 	private LoginService loginService;
+	
 	@Autowired
 	private SubjectService subjectService;
 	
@@ -62,7 +63,7 @@ public class SubjectController {
 	@CrossOrigin
 	@GetMapping("/searchId/{id}")
 	@ApiOperation(value = "Obtém os dados de uma disciplina a partir do seu identificador único.")
-	public ResponseEntity<SubjectPerfil> getSubject(@PathVariable long id, @RequestHeader(value = "Authorization") String token) 
+	public ResponseEntity<SubjectProfile> getSubject(@PathVariable long id, @RequestHeader(value = "Authorization") String token) 
 			throws NonExistentDisciplineException, UserOfflineException {
 		
 		Subject subject = subjectService.findById(id);
@@ -73,8 +74,8 @@ public class SubjectController {
 		if(emailUser == null) {
 			throw new UserOfflineException("Usuário não logado!");
 		}
-		SubjectPerfil ret = subjectService.getPerfilSubject(id, emailUser);
-		return new ResponseEntity<SubjectPerfil>(ret, HttpStatus.OK);
+		SubjectProfile ret = subjectService.getPerfilSubject(id, emailUser);
+		return new ResponseEntity<SubjectProfile>(ret, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/")

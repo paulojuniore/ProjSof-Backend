@@ -3,7 +3,7 @@ package com.backend.psoft.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectPerfil {
+public class SubjectProfile {
 
     private String name;
     private long id;
@@ -12,7 +12,7 @@ public class SubjectPerfil {
     private List<Comment> comments = new ArrayList<Comment>();
     private Integer avalUser;
 
-    public SubjectPerfil() {
+    public SubjectProfile() {
 
     }
     public long getId() {

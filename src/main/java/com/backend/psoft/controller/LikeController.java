@@ -1,19 +1,16 @@
 package com.backend.psoft.controller;
 
 import javax.servlet.ServletException;
-
 import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.backend.psoft.dao.SubjectDAO;
-import com.backend.psoft.dao.UserDAO;
+import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
+import com.backend.psoft.exception.users.NonExistentUserException;
+import com.backend.psoft.exception.users.UserOfflineException;
 import com.backend.psoft.model.Like;
-import com.backend.psoft.model.Subject;
-import com.backend.psoft.model.User;
 import com.backend.psoft.service.LikeService;
-
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -37,21 +34,20 @@ public class LikeController {
 	@CrossOrigin
 	@PostMapping("/setLike/")
 	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")
-	ResponseEntity<LikeResponse> create(@RequestBody Like like, @RequestHeader(value = "Authorization") String token) throws ServletException {
+	ResponseEntity<LikeResponse> create(@RequestBody Like like, @RequestHeader(value = "Authorization") String token) 
+			throws UserOfflineException, NonExistentUserException, NonExistentDisciplineException, ServletException {
 		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
-
 		if (emailUser == null) {
-			throw new ServletException("Usuário não logado.");
+			throw new UserOfflineException("Usuário não logado.");
 		}
-
 		like.setEmailUser(emailUser);
-
 		Integer[] likesAtual = likeService.create(like);
 		LikeResponse response = new LikeResponse(likesAtual[0], likesAtual[1]);
 		return new ResponseEntity<LikeResponse>(response, HttpStatus.OK);
 	}
 
 	private class LikeResponse {
+		
 		private Integer likes;
 		private Integer unlikes;
 
@@ -75,6 +71,7 @@ public class LikeController {
 		public void setUnlikes(Integer unlikes) {
 			this.unlikes = unlikes;
 		}
+		
 	}
 	
 }

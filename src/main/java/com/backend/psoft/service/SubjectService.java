@@ -4,7 +4,7 @@ import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
 import com.backend.psoft.model.Like;
 import com.backend.psoft.model.Subject;
-import com.backend.psoft.model.SubjectPerfil;
+import com.backend.psoft.model.SubjectProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -59,8 +59,8 @@ public class SubjectService {
 		return this.subjectDAO.findAll();
 	}
 
-	public SubjectPerfil getPerfilSubject(long id, String emailUser) {
-		SubjectPerfil ret = new SubjectPerfil();
+	public SubjectProfile getPerfilSubject(long id, String emailUser) {
+		SubjectProfile ret = new SubjectProfile();
 		Subject subject = findById(id);
 		ret.setComments(subject.getComments());
 		ret.setId(id);

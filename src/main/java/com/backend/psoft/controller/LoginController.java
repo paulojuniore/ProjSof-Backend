@@ -8,6 +8,8 @@ import com.backend.psoft.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.backend.psoft.exception.login.InvalidPasswordException;
+import com.backend.psoft.exception.users.NonExistentUserException;
 import com.backend.psoft.model.User;
 import com.backend.psoft.service.UserService;
 
@@ -30,19 +32,17 @@ public class LoginController {
 	@CrossOrigin
 	@PostMapping("/login")
 	@ApiOperation(value = "Efetua o login/autenticação de um usuário.")
-	public LoginResponse authenticate(@RequestBody User user) throws ServletException {
+	public LoginResponse authenticate(@RequestBody User user) 
+			throws InvalidPasswordException, NonExistentUserException {
 		// Recupera o usuário
 		User authUser = userService.findByEmail(user.getEmail());
-		
 		// Verificações
 		if(authUser == null) {
-			throw new ServletException("Usuário não existe!");
+			throw new NonExistentUserException("Usuário não existe!");
 		}
-		
 		if(!authUser.getPassword().equals(user.getPassword())) {
-			throw new ServletException("Senha inválida!");
+			throw new InvalidPasswordException("Senha inválida!");
 		}
-		
 		String token = Jwts.builder()
 				.setSubject(authUser.getEmail())
 				.signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
@@ -52,7 +52,6 @@ public class LoginController {
 		return new LoginResponse(token);
 	}
 
-	
 	// Responsável pelo token de acesso
 	private class LoginResponse {
 		private String token;
@@ -69,6 +68,5 @@ public class LoginController {
 			this.token = token;
 		}
 	}
-
 
 }

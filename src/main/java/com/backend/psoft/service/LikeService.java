@@ -1,13 +1,13 @@
 package com.backend.psoft.service;
 
 import javax.servlet.ServletException;
-import javax.sql.rowset.serial.SerialException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.backend.psoft.dao.LikeDAO;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.dao.UserDAO;
+import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
+import com.backend.psoft.exception.users.NonExistentUserException;
 import com.backend.psoft.model.Like;
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
@@ -43,8 +43,7 @@ public class LikeService {
 	 *
 	 * Abel Antunes de Lima Neto - 117210287
 	 */
-	public Integer[] create(Like like) throws ServletException {
-
+	public Integer[] create(Like like) throws NonExistentUserException, NonExistentDisciplineException, ServletException {
 		Integer[] retorno = new Integer[2];
 		String emailUser = like.getEmailUser();
 		long subjectId = like.getIdSubject();
@@ -75,9 +74,9 @@ public class LikeService {
 
 			return retorno;
 		} else if (user == null) {
-			throw new ServletException("Usuário inexistente.");	
+			throw new NonExistentUserException("Usuário inexistente.");	
 		} else if (subject == null) {
-			throw new ServletException("Disciplina inexistente.");
+			throw new NonExistentDisciplineException("Disciplina inexistente.");
 		} else {
 			throw new ServletException("Usuário e disciplinas inexistentes.");
 		}
