@@ -63,6 +63,12 @@ public class SubjectController {
 		return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
 	}
 
+
+	/*
+	 * Abel Antunes de Lima Neto - 117210287
+	 *
+	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
+	 */
 	@CrossOrigin
 	@GetMapping("/searchId/{id}")
 	@ApiOperation(value = "Obtém os dados de uma disciplina a partir do seu identificador único.")

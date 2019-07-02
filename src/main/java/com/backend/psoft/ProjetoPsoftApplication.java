@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @SpringBootApplication
@@ -22,6 +21,8 @@ public class ProjetoPsoftApplication {
 		filterRb.setFilter(new TokenFilter());
 		//Qualquer rota que comece assim precisará de autenticacao
 		filterRb.addUrlPatterns("/subjects/searchId/*");
+		filterRb.addUrlPatterns("/comments/*");
+		filterRb.addUrlPatterns("/actions/*");
 		return filterRb;
 	}
 }

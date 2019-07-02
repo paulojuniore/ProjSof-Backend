@@ -22,6 +22,8 @@ import com.backend.psoft.model.User;
  * 
  * @author Paulo Mendes da Silva Júnior - 117210922
  *
+ * Abel Antunes de Lima Neto - 117210287
+ *
  */
 @Service
 public class CommentService {
@@ -38,10 +40,11 @@ public class CommentService {
 		this.commentDAO = commentDAO;
 	}
 	
-	public Comment create(Comment comment) throws NonExistentDisciplineException, NonExistentUserException {
+	public Comment create(Comment comment, String emailUser) throws NonExistentDisciplineException, NonExistentUserException {
 		Subject subject = subjectDAO.findById(comment.getId_subject());
-		User user = userDAO.findByEmail(comment.getUser_email()); 
+		User user = userDAO.findByEmail(emailUser);
 		if(subject != null && user != null) {
+			comment.setUser_email(emailUser);
 			subject.addComment(comment);
 			return commentDAO.save(comment);			
 		} else if(subject == null) {
@@ -51,15 +54,15 @@ public class CommentService {
 		}
 	}
 	
-	public Comment createCommentOfAnswer(long id, Comment comment) 
+	public Comment createCommentOfAnswer(long id, Comment comment, String emailUser)
 			throws NonExistentDisciplineException, NonExistentUserException {
 		Comment commentAux = commentDAO.findById(id);
 		Subject subject = subjectDAO.findById(comment.getId_subject());
-		User user = userDAO.findByEmail(comment.getUser_email());
+		User user = userDAO.findByEmail(emailUser);
 		if(commentAux != null && subject != null && user != null) {
 			comment.setCommentParent(id);
 			comment.setData(new Date());
-			comment.setUser_email(user.getEmail());
+			comment.setUser_email(emailUser);
 			comment.setId_subject(subject.getId());
 			commentAux.addCommentResp(comment);
 			return commentDAO.save(comment);

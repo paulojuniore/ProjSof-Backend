@@ -30,7 +30,11 @@ public class LikeController {
 	public LikeController(LikeService likeService) {
 		this.likeService = likeService;
 	}
-
+	/*
+	 * Abel Antunes de Lima Neto - 117210287
+	 *
+	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
+	 */
 	@CrossOrigin
 	@PostMapping("/setLike/")
 	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")

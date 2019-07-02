@@ -48,18 +48,16 @@ public class Comment {
 		
 	}
 	
-	public Comment(long id, long id_subject, String user_email, String comment_msg, long comment_parent) {
+	public Comment(long id, long id_subject, String comment_msg, long comment_parent) {
 		this.id = id;
 		this.id_subject = id_subject;
-		this.user_email = user_email;
 		this.comment_msg = comment_msg;
 		this.comment_parent = comment_parent;
 		this.comments_resp = new ArrayList<Comment>();
 	}
 	
-	public Comment(long id_subject, String user_email, String comment_msg) {
+	public Comment(long id_subject,  String comment_msg) {
 		this.id_subject = id_subject;
-		this.user_email = user_email;
 		this.comment_msg = comment_msg;
 		this.comments_resp = new ArrayList<Comment>();
 	}

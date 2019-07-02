@@ -2,14 +2,12 @@ package com.backend.psoft.controller;
 
 import javax.servlet.ServletException;
 
+import com.backend.psoft.exception.users.UserOfflineException;
+import com.backend.psoft.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.backend.psoft.model.Comment;
 import com.backend.psoft.service.CommentService;
 
@@ -25,20 +23,46 @@ import io.swagger.annotations.ApiOperation;
 public class CommentController {
 	
 	private CommentService commentService;
-	
+
+	@Autowired
+	private LoginService loginService;
+
+	/*
+	 * Abel Antunes de Lima Neto - 117210287
+	 *
+	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
+	 */
 	public CommentController(CommentService commentService) {
 		this.commentService = commentService;
 	}
 	
 	@PostMapping("/postComment/")
 	@ApiOperation(value = "Posta um comentário em uma disciplina.")
-	ResponseEntity<Comment> postComment(@RequestBody Comment comment) throws ServletException {
-		return new ResponseEntity<Comment>(commentService.create(comment), HttpStatus.CREATED);
+	ResponseEntity<Comment> postComment(@RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) throws ServletException {
+
+		//Confirma se um usuario está logado
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+
+		return new ResponseEntity<Comment>(commentService.create(comment, emailUser), HttpStatus.CREATED);
 	}
-	
+
+	/*
+	 * Abel Antunes de Lima Neto - 117210287
+	 *
+	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
+	 */
 	@PostMapping("/postCommentOfAnswer/{id}")
-	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment) throws ServletException {
-		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment), HttpStatus.CREATED);
+	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) throws ServletException {
+
+		//Confirma se um usuario está logado
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment, emailUser), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/deleteComment/{id}")
