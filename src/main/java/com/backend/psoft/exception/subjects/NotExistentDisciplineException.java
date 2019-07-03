@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @SuppressWarnings("serial")
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class NonExistentDisciplineException extends RuntimeException {
+public class NotExistentDisciplineException extends RuntimeException {
 	
-	public NonExistentDisciplineException(String msg) {
+	public NotExistentDisciplineException(String msg) {
 		super(msg);
 	}
 

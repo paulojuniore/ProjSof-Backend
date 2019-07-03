@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @SuppressWarnings("serial")
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class NonExistentUserException extends RuntimeException {
+public class NotExistentUserException extends RuntimeException {
 	
-	public NonExistentUserException(String msg) {
+	public NotExistentUserException(String msg) {
 		super(msg);
 	}
 	

@@ -9,8 +9,8 @@ import com.backend.psoft.dao.CommentDAO;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.dao.UserDAO;
 import com.backend.psoft.exception.comment.CommentParentInexistentException;
-import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
-import com.backend.psoft.exception.users.NonExistentUserException;
+import com.backend.psoft.exception.subjects.NotExistentDisciplineException;
+import com.backend.psoft.exception.users.NotExistentUserException;
 import com.backend.psoft.model.Comment;
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.model.User;
@@ -42,7 +42,7 @@ public class CommentService {
 
 	}
 	
-	public Comment create(Comment comment, String emailUser) throws NonExistentDisciplineException, NonExistentUserException {
+	public Comment create(Comment comment, String emailUser) throws NotExistentDisciplineException, NotExistentUserException {
 		Subject subject = subjectDAO.findById(comment.getId_subject());
 		User user = userDAO.findByEmail(emailUser);
 		if(subject != null && user != null) {
@@ -50,14 +50,14 @@ public class CommentService {
 			subject.addComment(comment);
 			return commentDAO.save(comment);			
 		} else if(subject == null) {
-			throw new NonExistentDisciplineException("Disciplina inexistente!");			
+			throw new NotExistentDisciplineException("Disciplina inexistente!");			
 		} else {
-			throw new NonExistentDisciplineException("Usuário inexistente!");
+			throw new NotExistentDisciplineException("Usuário inexistente!");
 		}
 	}
 	
 	public Comment createCommentOfAnswer(long id, Comment comment, String emailUser)
-			throws NonExistentDisciplineException, NonExistentUserException {
+			throws NotExistentDisciplineException, NotExistentUserException {
 		Comment commentAux = commentDAO.findById(id);
 		Subject subject = subjectDAO.findById(comment.getId_subject());
 		Comment commentInSub = subject.getComment(id);
@@ -73,11 +73,11 @@ public class CommentService {
 		} else if(commentAux == null) {
 			throw new CommentParentInexistentException("Comentário inexistente!");
 		} else if(subject == null) {
-			throw new NonExistentDisciplineException("Disciplina inexistente!");
+			throw new NotExistentDisciplineException("Disciplina inexistente!");
 		} else if(commentInSub == null) {
 			throw new CommentParentInexistentException("Esse comentario ja foi apagado.");
 		} else {
-			throw new NonExistentUserException("Usuário inexistente!");
+			throw new NotExistentUserException("Usuário inexistente!");
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class CommentService {
 	public void deleteComment(Comment comment, String emailUser) {
 		Subject subject = subjectService.findById(comment.getId_subject());
 		if (subject == null) {
-			throw new NonExistentDisciplineException("Erro ao encontrar disciplina.");
+			throw new NotExistentDisciplineException("Erro ao encontrar disciplina.");
 		}
 
 		String emailComment = comment.getUser_email();

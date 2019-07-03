@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
-import com.backend.psoft.exception.users.NonExistentUserException;
+import com.backend.psoft.exception.subjects.NotExistentDisciplineException;
+import com.backend.psoft.exception.users.NotExistentUserException;
 import com.backend.psoft.exception.users.UserOfflineException;
 import com.backend.psoft.model.Like;
 import com.backend.psoft.service.LikeService;
@@ -40,7 +40,7 @@ public class LikeController {
 	@PostMapping("/setLike/")
 	@ApiOperation(value = "Requisição para efetuar um like/dislike em uma determinada disciplina.")
 	ResponseEntity<LikeResponse> create(@RequestBody Like like, @RequestHeader(value = "Authorization") String token) 
-			throws UserOfflineException, NonExistentUserException, NonExistentDisciplineException, ServletException {
+			throws UserOfflineException, NotExistentUserException, NotExistentDisciplineException, ServletException {
 		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
 		if (emailUser == null) {
 			throw new UserOfflineException("Usuário não logado.");

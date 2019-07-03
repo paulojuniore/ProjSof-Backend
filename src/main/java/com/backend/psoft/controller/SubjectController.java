@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
-import com.backend.psoft.exception.subjects.NonExistentDisciplineException;
+import com.backend.psoft.exception.subjects.NotExistentDisciplineException;
 import com.backend.psoft.exception.users.UserOfflineException;
 import com.backend.psoft.model.Subject;
 import com.backend.psoft.service.SubjectService;
@@ -63,11 +63,11 @@ public class SubjectController {
 	@GetMapping("/searchId/{id}")
 	@ApiOperation(value = "Obtém os dados de uma disciplina a partir do seu identificador único.")
 	public ResponseEntity<SubjectProfile> getSubject(@PathVariable long id, @RequestHeader(value = "Authorization") String token) 
-			throws NonExistentDisciplineException, UserOfflineException {
+			throws NotExistentDisciplineException, UserOfflineException {
 		
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {
-			throw new NonExistentDisciplineException("Disciplina inexistente na base de dados.");
+			throw new NotExistentDisciplineException("Disciplina inexistente na base de dados.");
 		}
 		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
 		if(emailUser == null) {
@@ -100,10 +100,10 @@ public class SubjectController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deleta uma disciplina da base de dados a partir do seu identificador.")
-	public ResponseEntity<Subject> delete(@PathVariable long id) throws NonExistentDisciplineException {
+	public ResponseEntity<Subject> delete(@PathVariable long id) throws NotExistentDisciplineException {
 		Subject subject = subjectService.findById(id);
 		if(subject == null) {
-			throw new NonExistentDisciplineException("Erro ao deletar! Disciplina inexistente na base de dados.");
+			throw new NotExistentDisciplineException("Erro ao deletar! Disciplina inexistente na base de dados.");
 		}
 		subjectService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
