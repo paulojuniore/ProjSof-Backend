@@ -1,6 +1,8 @@
 package com.backend.psoft.service;
 
 import java.util.Date;
+
+import com.backend.psoft.exception.login.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.backend.psoft.dao.CommentDAO;
@@ -23,16 +25,21 @@ import com.backend.psoft.model.User;
 @Service
 public class CommentService {
 	
-	private CommentDAO commentDAO;
-	
+
 	@Autowired
 	private SubjectDAO subjectDAO;
+
+	@Autowired
+	private SubjectService subjectService;
+
+	@Autowired
+	private CommentDAO commentDAO;
 	
 	@Autowired
 	private UserDAO userDAO;
 	
 	public CommentService(CommentDAO commentDAO) {
-		this.commentDAO = commentDAO;
+
 	}
 	
 	public Comment create(Comment comment, String emailUser) throws NonExistentDisciplineException, NonExistentUserException {
@@ -53,8 +60,9 @@ public class CommentService {
 			throws NonExistentDisciplineException, NonExistentUserException {
 		Comment commentAux = commentDAO.findById(id);
 		Subject subject = subjectDAO.findById(comment.getId_subject());
+		Comment commentInSub = subject.getComment(id);
 		User user = userDAO.findByEmail(emailUser);
-		if(commentAux != null && subject != null && user != null) {
+		if(commentAux != null && subject != null && user != null && commentInSub != null) {
 			comment.setCommentParent(id);
 			comment.setData(new Date());
 			comment.setUser_email(emailUser);
@@ -66,6 +74,8 @@ public class CommentService {
 			throw new CommentParentInexistentException("Comentário inexistente!");
 		} else if(subject == null) {
 			throw new NonExistentDisciplineException("Disciplina inexistente!");
+		} else if(commentInSub == null) {
+			throw new CommentParentInexistentException("Esse comentario ja foi apagado.");
 		} else {
 			throw new NonExistentUserException("Usuário inexistente!");
 		}
@@ -73,6 +83,26 @@ public class CommentService {
 	
 	public Comment findById(long id) {
 		return commentDAO.findById(id);
+	}
+
+	public void deleteComment(Comment comment, String emailUser) {
+		Subject subject = subjectService.findById(comment.getId_subject());
+		if (subject == null) {
+			throw new NonExistentDisciplineException("Erro ao encontrar disciplina.");
+		}
+
+		String emailComment = comment.getUser_email();
+		if (!emailComment.equals(emailUser)) {
+			throw new InvalidTokenException("Esse comentario possui a outro usuario.");
+		}
+		if (!(comment.getCommentParent() > 0)) {
+			subject.deleteComment(comment);
+			subjectDAO.save(subject);
+		} else {
+			Comment commentPai = subject.getComment(comment.getCommentParent());
+			commentPai.deleteCommentResp(comment);
+			commentDAO.save(commentPai);
+		}
 	}
 
 }

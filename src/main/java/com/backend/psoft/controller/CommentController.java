@@ -65,17 +65,22 @@ public class CommentController {
 		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment, emailUser), HttpStatus.CREATED);
 	}
 	
-	/*
+
 	@DeleteMapping("/deleteComment/{id}")
 	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")
-	ResponseEntity<Comment> deleteComment(@PathVariable long id) throws ServletException {
+	ResponseEntity<Comment> deleteComment(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException {
 		Comment comment = commentService.findById(id);
 		if(comment == null) {
 			throw new ServletException("Comentário inexistente!");
 		}
-		// commentService.deleteById(id);
+		//Confirma se um usuario está logado
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+
+		commentService.deleteComment(comment, emailUser);
 		return new ResponseEntity<Comment>(HttpStatus.OK);
 	}
-	*/
 
 }

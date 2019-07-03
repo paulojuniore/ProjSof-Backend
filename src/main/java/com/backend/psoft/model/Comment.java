@@ -114,5 +114,9 @@ public class Comment {
 	public void addCommentResp (Comment resp) {
 		this.comments_resp.add(resp);
 	}
+
+	public void deleteCommentResp (Comment resp) {
+		this.comments_resp.remove(resp);
+	}
 	
 }

@@ -149,6 +149,10 @@ public class Subject {
 		}
 		return contaUnlikes;
 	}
+
+	public void deleteComment(Comment comment) {
+		this.comments.remove(comment);
+	}
 	
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
@@ -180,6 +184,22 @@ public class Subject {
 
 	public Integer getNumComents() {
 		return this.comments.size();
+	}
+
+	public Comment getComment(long idComment) {
+		Integer indice = 0;
+		Boolean naoEncontrou = true;
+		Comment retorno = null;
+		while (indice < this.comments.size() && naoEncontrou) {
+			if (this.comments.get(indice).getId() == idComment) {
+				retorno = this.comments.get(indice);
+				naoEncontrou = false;
+			}
+
+			indice ++;
+		}
+
+		return retorno;
 	}
 
 	public List<Comment> getComments() {
