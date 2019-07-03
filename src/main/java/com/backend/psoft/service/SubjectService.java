@@ -2,6 +2,7 @@ package com.backend.psoft.service;
 
 import com.backend.psoft.comparators.SubjectsComparatorComments;
 import com.backend.psoft.comparators.SubjectsComparatorLikes;
+import com.backend.psoft.comparators.SubjectsComparatorProportionLikesAndDislikes;
 import com.backend.psoft.comparators.SubjectsComparatorUnlikes;
 import com.backend.psoft.dao.SubjectDAO;
 import com.backend.psoft.exception.subjects.ExistingDisciplineException;
@@ -102,6 +103,12 @@ public class SubjectService {
 	public List<Subject> orderByNumOfComments() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorComments());
+		return subjects;
+	}
+	
+	public List<Subject> orderByProportionLikesDislikes() {
+		List<Subject> subjects = subjectDAO.findAll();
+		Collections.sort(subjects, new SubjectsComparatorProportionLikesAndDislikes());
 		return subjects;
 	}
 

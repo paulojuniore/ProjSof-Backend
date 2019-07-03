@@ -6,11 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
-
 @SpringBootApplication
-
 public class ProjetoPsoftApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoPsoftApplication.class, args);
 	}
@@ -29,4 +27,5 @@ public class ProjetoPsoftApplication {
 		filterRb.addUrlPatterns("/subjects/orderByNumOfComments");
 		return filterRb;
 	}
+	
 }

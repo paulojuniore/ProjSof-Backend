@@ -67,9 +67,7 @@ public class Subject {
 
 	}
 
-	/*
-	 * Comparators por likes, unlikes e comments
-	 */
+	// Comparator para número de likes
 	public int compareToLikes(Subject sub) {
 		if (this.countNoLikes() < sub.countNoLikes()) {
 			return 1;
@@ -80,6 +78,7 @@ public class Subject {
 		}
 	}
 
+	// Comparator para número de dislikes
 	public int compareToUnlikes(Subject sub) {
 		if (this.countNoUnlikes() < sub.countNoUnlikes()) {
 			return 1;
@@ -90,6 +89,7 @@ public class Subject {
 		}
 	}
 
+	// Comparator para número de comentários
 	public int compareToComents(Subject sub) {
 		if (this.getNumComents() < sub.getNumComents()) {
 			return 1;
@@ -98,6 +98,21 @@ public class Subject {
 		} else {
 			return 0;
 		}
+	}
+	
+	// Comparator para proporção de likes/dislikes
+	public int compareToProportionLikesAndDislikes(Subject sub) {
+		if(this.countNoLikes() > 0 && this.countNoUnlikes() > 0
+				&& sub.countNoLikes() > 0 && sub.countNoUnlikes() > 0) {
+			int prop1 = this.countNoLikes() / (this.countNoLikes() + this.countNoUnlikes());
+			int prop2 = sub.countNoLikes() / (sub.countNoLikes() + sub.countNoUnlikes());
+			if (prop1 < prop2) {
+				return 1;
+			} else if (prop1 > prop2) {
+				return -1;
+			}
+		}
+		return 0;
 	}
 
 	public Like getLike(String email) {

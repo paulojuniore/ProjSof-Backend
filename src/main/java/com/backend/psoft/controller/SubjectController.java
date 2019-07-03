@@ -127,5 +127,10 @@ public class SubjectController {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumOfComments(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/orderByProportionLikesDislikes")
+	@ApiOperation(value = "Orderna as disciplinas a partir da proporção entre os likes/dislikes de cada disciplina.")
+	public ResponseEntity<List<Subject>> orderByProportionLikesDislikes() {
+		return new ResponseEntity<List<Subject>>(subjectService.orderByProportionLikesDislikes(), HttpStatus.OK);
+	}
 	
 }
