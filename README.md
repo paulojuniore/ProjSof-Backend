@@ -6,8 +6,8 @@ O UFCG Cursos database é uma aplicação para classificação e reviews de disc
 
 - [x] Caso de uso 1: cadastrar/autenticar usuários
 
-..* Todos os dados devem ser preenchidos corretamente, sendo nome, sobrenome e email não vazios e válidos. Além da senha ter no mínimo 5 caracteres.
-..* Um usuário só é cadastrado na base de dados se o mesmo clicar no link enviado para o seu email de cadastro.
+* Todos os dados devem ser preenchidos corretamente, sendo nome, sobrenome e email não vazios e válidos. Além da senha ter no mínimo 5 caracteres.
+* Um usuário só é cadastrado na base de dados se o mesmo clicar no link enviado para o seu email de cadastro.
 
 - [x] Caso de uso 2: Pesquisar disciplinas a partir de uma (sub)string
 - [x] Caso de uso 3: Recuperar o perfil de uma disciplina a partir do seu código numérico
