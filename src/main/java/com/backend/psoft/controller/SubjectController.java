@@ -109,24 +109,28 @@ public class SubjectController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/orderByNumLikes")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de likes que cada uma possui.")
 	public ResponseEntity<List<Subject>> orderByNumLikes() {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumLikes(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/orderByNumDislikes")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de dislikes que cada uma possui.")
 	public ResponseEntity<List<Subject>> orderByNumDislikes() {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumDislikes(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/orderByNumOfComments")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de comentários que cada disciplina possui.")
 	public ResponseEntity<List<Subject>> orderByNumOfComments() {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumOfComments(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/orderByProportionLikesDislikes")
 	@ApiOperation(value = "Orderna as disciplinas a partir da proporção entre os likes/dislikes de cada disciplina.")
 	public ResponseEntity<List<Subject>> orderByProportionLikesDislikes() {
