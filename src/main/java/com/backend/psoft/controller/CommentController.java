@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.backend.psoft.model.Comment;
 import com.backend.psoft.service.CommentService;
+import java.util.List;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -82,5 +83,34 @@ public class CommentController {
 		commentService.deleteComment(comment, emailUser);
 		return new ResponseEntity<Comment>(HttpStatus.OK);
 	}
+
+	/**
+	 * 
+	 * Pegar as resposta de um comentário, dado seu ID
+	 * 
+	 * @param id
+	 * @param token
+	 * @return
+	 * @throws ServletException
+	 */
+
+	@GetMapping("/getCommentId/{id}")
+	ResponseEntity<List<Comment>> getCommentAnswer(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException{
+		Comment comment = commentService.findById(id);
+
+		if(comment == null){
+			throw new ServletException("Comentário inexistente");
+		}
+
+		//Confirma se um usuario está logado
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+
+
+		return new ResponseEntity<List<Comment>>(comment.getComments_resp(), HttpStatus.OK);
+	}
+
 
 }
