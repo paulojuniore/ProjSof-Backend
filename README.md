@@ -21,4 +21,5 @@ O UFCG Cursos database é uma aplicação para classificação e reviews de disc
 - [x] Caso de uso 6: Dar/retirar like em uma disciplina
 - [x] Caso de uso 7: Mostrar o ranking das disciplinas
 
-clique [aqui](https://projsof.herokuapp.com/api/swagger-ui.html#) para acessar a *documentação Swagger* da API.
+
+clique [aqui](https://projsof.herokuapp.com/api/swagger-ui.html#) para acessar a **documentação Swagger** da API.
