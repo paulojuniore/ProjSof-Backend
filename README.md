@@ -1,4 +1,4 @@
-# Projeto-Psoft
+# Projeto-Psoft back-end
 
 ### Back-end da aplicação para o projeto da disciplina Projeto de Software 2019.1 by UFCG
 
