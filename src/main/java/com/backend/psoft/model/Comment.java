@@ -111,10 +111,20 @@ public class Comment {
 		return this.comments_resp;
 	}
 
+	/*
+	 * Método que adiciona uma resposta a um comentário
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public void addCommentResp (Comment resp) {
 		this.comments_resp.add(resp);
 	}
 
+	/*
+	 * Método que remove uma resposta de um comentário
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public void deleteCommentResp (Comment resp) {
 		this.comments_resp.remove(resp);
 	}

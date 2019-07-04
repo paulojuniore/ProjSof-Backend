@@ -50,6 +50,12 @@ public class SubjectService {
 		return this.subjectDAO.save(subject);
 	}
 
+	/*
+	 * Método que adiciona várias disciplinas ao sistema a partir de uma
+	 * lista de disciplinas recebida
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public List<Subject> createForList(Subject[] arrayDisciplinas) throws ExistingDisciplineException {
 		for (int i = 0; i < arrayDisciplinas.length; i++){
 			Subject sub = subjectDAO.findBySubjectName(arrayDisciplinas[i].getSubjectName());
@@ -63,6 +69,12 @@ public class SubjectService {
 		return this.subjectDAO.findAll();
 	}
 
+	/*
+	 * Método que gera o perfil de uma disciplina para envia-lo ao front apenas
+	 * com os dados necessários.
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public SubjectProfile getPerfilSubject(long id, String emailUser) {
 		SubjectProfile ret = new SubjectProfile();
 		Subject subject = findById(id);
@@ -87,25 +99,39 @@ public class SubjectService {
 	public void delete(long id) {
 		this.subjectDAO.deleteById(id);
 	}
-	
+
+	/*
+	 * Método que ordena as disciplinas a partir do numero de likes e retorna em uma lista
+	 */
 	public List<Subject> orderByNumLikes() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorLikes());
 		return subjects;
 	}
-	
+
+
+	/*
+	 * Método que ordena as disciplinas a partir do numero de deslikes e retorna em uma lista
+	 */
 	public List<Subject> orderByNumDislikes() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorUnlikes());
 		return subjects;
 	}
-	
+
+
+	/*
+	 * Método que ordena as disciplinas a partir do numero de comentários e retorna em uma lista
+	 */
 	public List<Subject> orderByNumOfComments() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorComments());
 		return subjects;
 	}
-	
+
+	/*
+	 * Método que ordena as disciplinas a partir da proporção likes/deslikes e retorna em uma lista
+	 */
 	public List<Subject> orderByProportionLikesDislikes() {
 		List<Subject> subjects = subjectDAO.findAll();
 		Collections.sort(subjects, new SubjectsComparatorProportionLikesAndDislikes());

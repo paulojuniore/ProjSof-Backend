@@ -51,6 +51,11 @@ public class LikeController {
 		return new ResponseEntity<LikeResponse>(response, HttpStatus.OK);
 	}
 
+	/*
+	 * Response enviado ao criar um novo like.
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	private class LikeResponse {
 		
 		private Integer likes;

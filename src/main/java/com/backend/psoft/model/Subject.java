@@ -129,7 +129,9 @@ public class Subject {
 		}
 		return retorno;
 	}
-	
+	/*
+	 * Método que retorna o número de likes
+	 */
 	public int countNoLikes() {
 		int contaLikes = 0;
 		for (Like like : this.likes) {
@@ -139,7 +141,10 @@ public class Subject {
 		}
 		return contaLikes;
 	}
-	
+
+	/*
+	 * Método que retorna o número de deslikes
+	 */
 	public int countNoUnlikes() {
 		int contaUnlikes = 0;
 		for (Like like : this.likes) {

@@ -67,7 +67,14 @@ public class CommentController {
 		}
 		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment, emailUser), HttpStatus.CREATED);
 	}
-	
+
+	/*
+	 * Método que remove um comentário a partir de seu id,
+	 * é necessário o token do usuário para confirmar se o comentário
+	 * é dele.
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	@CrossOrigin
 	@DeleteMapping("/deleteComment/{id}")
 	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")

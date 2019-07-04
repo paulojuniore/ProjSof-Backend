@@ -81,7 +81,10 @@ public class LikeService {
 			throw new ServletException("Usuário e disciplinas inexistentes.");
 		}
 	}
-	
+
+	/*
+	 * Método que busca um comentário a partir de seu id
+	 */
 	public Like findById(long id) {
 		return likeDAO.findById(id);
 	}

@@ -3,6 +3,12 @@ package com.backend.psoft.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Classe que representa o perfil de uma disciplina, possui apenas os
+ * dados relevantes para o front exibir seu perfil
+ *
+ * Abel Antunes de Lima Neto - 117210287
+ */
 public class SubjectProfile {
 
     private String name;

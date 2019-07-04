@@ -108,28 +108,40 @@ public class SubjectController {
 		subjectService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
+
+	/*
+	 * Método que invoca a função do service que reotrna as disciplinas a partir de seu número de likes
+	 */
 	@CrossOrigin
 	@GetMapping("/orderByNumLikes")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de likes que cada uma possui.")
 	public ResponseEntity<List<Subject>> orderByNumLikes() {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumLikes(), HttpStatus.OK);
 	}
-	
+
+	/*
+	 * Método que invoca a função do service que reotrna as disciplinas a partir de seu número de deslikes
+	 */
 	@CrossOrigin
 	@GetMapping("/orderByNumDislikes")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de dislikes que cada uma possui.")
 	public ResponseEntity<List<Subject>> orderByNumDislikes() {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumDislikes(), HttpStatus.OK);
 	}
-	
+
+	/*
+	 * Método que invoca a função do service que reotrna as disciplinas a partir de seu número de comentarios
+	 */
 	@CrossOrigin
 	@GetMapping("/orderByNumOfComments")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de comentários que cada disciplina possui.")
 	public ResponseEntity<List<Subject>> orderByNumOfComments() {
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumOfComments(), HttpStatus.OK);
 	}
-	
+
+	/*
+	 * Método que invoca a função do service que reotrna as disciplinas a partir da proporção likes/deslikes
+	 */
 	@CrossOrigin
 	@GetMapping("/orderByProportionLikesDislikes")
 	@ApiOperation(value = "Orderna as disciplinas a partir da proporção entre os likes/dislikes de cada disciplina.")

@@ -13,6 +13,11 @@ public class ProjetoPsoftApplication {
 		SpringApplication.run(ProjetoPsoftApplication.class, args);
 	}
 
+	/*
+	 * Método responsável por adicionar rotas privadas
+	 *
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
 	public FilterRegistrationBean filterJwt() {

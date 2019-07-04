@@ -41,7 +41,10 @@ public class CommentService {
 	public CommentService(CommentDAO commentDAO) {
 
 	}
-	
+	/*
+	 * Método que cria um novo comentário e o armazena no banco de dados
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public Comment create(Comment comment, String emailUser) throws NotExistentDisciplineException, NotExistentUserException {
 		Subject subject = subjectDAO.findById(comment.getId_subject());
 		User user = userDAO.findByEmail(emailUser);
@@ -55,7 +58,11 @@ public class CommentService {
 			throw new NotExistentDisciplineException("Usuário inexistente!");
 		}
 	}
-	
+
+	/*
+	 * Método que cria uma resposta para um comentário e armazena no banco de dados.
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public Comment createCommentOfAnswer(long id, Comment comment, String emailUser)
 			throws NotExistentDisciplineException, NotExistentUserException {
 		Comment commentAux = commentDAO.findById(id);
@@ -80,11 +87,18 @@ public class CommentService {
 			throw new NotExistentUserException("Usuário inexistente!");
 		}
 	}
-	
+
+	/*
+	 * Método que busca um comentario por seu id.
+	 */
 	public Comment findById(long id) {
 		return commentDAO.findById(id);
 	}
 
+	/*
+	 * Método que drleta um comentário a partir de seu "clone"
+	 * Abel Antunes de Lima Neto - 117210287
+	 */
 	public void deleteComment(Comment comment, String emailUser) {
 		Subject subject = subjectService.findById(comment.getId_subject());
 		if (subject == null) {
