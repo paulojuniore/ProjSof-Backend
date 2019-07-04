@@ -70,6 +70,8 @@ public class CommentService {
 		Comment commentInSub = subject.getComment(id);
 		User user = userDAO.findByEmail(emailUser);
 		if(commentAux != null && subject != null && user != null && commentInSub != null) {
+			String nameUser = (user.getFirstName() + " " + user.getLastName());
+			comment.setUser_name(nameUser);
 			comment.setCommentParent(id);
 			comment.setData(new Date());
 			comment.setUser_email(emailUser);

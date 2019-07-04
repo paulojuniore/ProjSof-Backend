@@ -34,6 +34,8 @@ public class Comment {
 	
 	private String comment_msg;
 
+	private String user_name;
+
 	private long comment_parent;
 
 	@Column
@@ -105,6 +107,14 @@ public class Comment {
 	
 	public void setCommentParent(long commentId) {
 		this.comment_parent = commentId;
+	}
+
+	public String getUser_name() {
+		return this.user_name;
+	}
+
+	public void setUser_name(String newName) {
+		this.user_name = newName;
 	}
 
 	public List<Comment> getComments_resp () {
