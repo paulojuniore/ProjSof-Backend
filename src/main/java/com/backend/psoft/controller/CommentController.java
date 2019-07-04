@@ -3,7 +3,9 @@ package com.backend.psoft.controller;
 import javax.servlet.ServletException;
 
 import com.backend.psoft.exception.users.UserOfflineException;
+import com.backend.psoft.model.SubjectProfile;
 import com.backend.psoft.service.LoginService;
+import com.backend.psoft.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class CommentController {
 	private CommentService commentService;
 
 	@Autowired
+	private SubjectService subjectService;
+
+	@Autowired
 	private LoginService loginService;
 
 	/*
@@ -40,15 +45,15 @@ public class CommentController {
 	@CrossOrigin
 	@PostMapping("/postComment/")
 	@ApiOperation(value = "Posta um comentário em uma disciplina.")
-	ResponseEntity<Comment> postComment(@RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) throws ServletException {
+	ResponseEntity<SubjectProfile> postComment(@RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) throws ServletException {
 
 		//Confirma se um usuario está logado
 		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
 		if(emailUser == null) {
 			throw new UserOfflineException("Usuário não logado!");
 		}
-
-		return new ResponseEntity<Comment>(commentService.create(comment, emailUser), HttpStatus.CREATED);
+		commentService.create(comment, emailUser);
+		return new ResponseEntity<SubjectProfile>(subjectService.getPerfilSubject(comment.getId_subject(), comment.getUser_email()), HttpStatus.CREATED);
 	}
 
 	/*
@@ -58,14 +63,16 @@ public class CommentController {
 	 */
 	@CrossOrigin
 	@PostMapping("/postCommentOfAnswer/{id}")
-	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) 
+	ResponseEntity<SubjectProfile> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment, @RequestHeader(value = "Authorization") String token)
 			throws UserOfflineException {
 		//Confirma se um usuario está logado
 		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
 		if(emailUser == null) {
 			throw new UserOfflineException("Usuário não logado!");
 		}
-		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment, emailUser), HttpStatus.CREATED);
+
+		commentService.createCommentOfAnswer(id, comment, emailUser);
+		return new ResponseEntity<SubjectProfile>(subjectService.getPerfilSubject(comment.getId_subject(), comment.getUser_email()), HttpStatus.CREATED);
 	}
 
 	/*
