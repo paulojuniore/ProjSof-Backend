@@ -23,7 +23,7 @@ public class EmailBoasVindas {
         this.remetente = "Avalia Disciplinas UFCG <avaliadisciplinasufcg@gmail.com>";
         this.assunto = "Bem vindo ao Avalia Disciplinas UFCG!!";
         this.mensagem = "Seja bem vindo ao sistema de avaliações de disciplinas da UFCG!\n\n" +
-                "Acesse o link a seguir para confirmar seu cadastro: \n" + "http://localhost:8080/api/users/verify/" + token + "\n\n\n" +
+                "Acesse o link a seguir para confirmar seu cadastro: \n" + "http://localhost:8080/api/users/verify/" + token + "\n\n" +
         "https://projsof.herokuapp.com/api/users/verify/" + token;
     }
 
