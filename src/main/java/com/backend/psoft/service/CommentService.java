@@ -49,6 +49,8 @@ public class CommentService {
 		Subject subject = subjectDAO.findById(comment.getId_subject());
 		User user = userDAO.findByEmail(emailUser);
 		if(subject != null && user != null) {
+			String nameUser = (user.getFirstName() + " " + user.getLastName());
+			comment.setUser_name(nameUser);
 			comment.setUser_email(emailUser);
 			subject.addComment(comment);
 			return commentDAO.save(comment);			
