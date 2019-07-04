@@ -37,6 +37,7 @@ public class CommentController {
 		this.commentService = commentService;
 	}
 	
+	@CrossOrigin
 	@PostMapping("/postComment/")
 	@ApiOperation(value = "Posta um comentário em uma disciplina.")
 	ResponseEntity<Comment> postComment(@RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) throws ServletException {
@@ -55,6 +56,7 @@ public class CommentController {
 	 *
 	 * O método recebe o token do usuário e a partir dele identifica qual o usuário em questão
 	 */
+	@CrossOrigin
 	@PostMapping("/postCommentOfAnswer/{id}")
 	ResponseEntity<Comment> postCommentOfAnswer(@PathVariable long id, @RequestBody Comment comment, @RequestHeader(value = "Authorization") String token) 
 			throws UserOfflineException {
@@ -66,7 +68,7 @@ public class CommentController {
 		return new ResponseEntity<Comment>(commentService.createCommentOfAnswer(id, comment, emailUser), HttpStatus.CREATED);
 	}
 	
-
+	@CrossOrigin
 	@DeleteMapping("/deleteComment/{id}")
 	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")
 	ResponseEntity<Comment> deleteComment(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException {
@@ -94,6 +96,7 @@ public class CommentController {
 	 * @throws ServletException
 	 */
 
+	@CrossOrigin
 	@GetMapping("/getCommentId/{id}")
 	ResponseEntity<List<Comment>> getCommentAnswer(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException{
 		Comment comment = commentService.findById(id);
