@@ -115,7 +115,13 @@ public class SubjectController {
 	@CrossOrigin
 	@GetMapping("/orderByNumLikes")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de likes que cada uma possui.")
-	public ResponseEntity<List<Subject>> orderByNumLikes() {
+	public ResponseEntity<List<Subject>> orderByNumLikes(@RequestHeader(value = "Authorization") String token) {
+
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumLikes(), HttpStatus.OK);
 	}
 
@@ -125,7 +131,13 @@ public class SubjectController {
 	@CrossOrigin
 	@GetMapping("/orderByNumDislikes")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de dislikes que cada uma possui.")
-	public ResponseEntity<List<Subject>> orderByNumDislikes() {
+	public ResponseEntity<List<Subject>> orderByNumDislikes(@RequestHeader(value = "Authorization") String token) {
+
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumDislikes(), HttpStatus.OK);
 	}
 
@@ -135,7 +147,13 @@ public class SubjectController {
 	@CrossOrigin
 	@GetMapping("/orderByNumOfComments")
 	@ApiOperation(value = "Ordena as disciplinas a partir do número de comentários que cada disciplina possui.")
-	public ResponseEntity<List<Subject>> orderByNumOfComments() {
+	public ResponseEntity<List<Subject>> orderByNumOfComments(@RequestHeader(value = "Authorization") String token) {
+
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+
 		return new ResponseEntity<List<Subject>>(subjectService.orderByNumOfComments(), HttpStatus.OK);
 	}
 
@@ -145,7 +163,13 @@ public class SubjectController {
 	@CrossOrigin
 	@GetMapping("/orderByProportionLikesDislikes")
 	@ApiOperation(value = "Orderna as disciplinas a partir da proporção entre os likes/dislikes de cada disciplina.")
-	public ResponseEntity<List<Subject>> orderByProportionLikesDislikes() {
+	public ResponseEntity<List<Subject>> orderByProportionLikesDislikes(@RequestHeader(value = "Authorization") String token) {
+
+		String emailUser = loginService.getEmailUserLogin(token.split("Bearer ")[1]);
+		if(emailUser == null) {
+			throw new UserOfflineException("Usuário não logado!");
+		}
+		
 		return new ResponseEntity<List<Subject>>(subjectService.orderByProportionLikesDislikes(), HttpStatus.OK);
 	}
 	
