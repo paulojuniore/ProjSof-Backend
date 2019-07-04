@@ -1,5 +1,7 @@
 package com.backend.psoft.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +28,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private Date data = Calendar.getInstance().getTime();
+	private String data;
 	
 	private long id_subject;
 	
@@ -59,6 +61,7 @@ public class Comment {
 		this.id_subject = id_subject;
 		this.comment_msg = comment_msg;
 		this.comments_resp = new ArrayList<Comment>();
+		this.setData();
 	}
 	
 	public long getId() {
@@ -69,12 +72,15 @@ public class Comment {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setData() {
+		Date date = (Calendar.getInstance().getTime());
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String strDate = dateFormat.format(date);
+		this.data = strDate;
 	}
 
 	public long getId_subject() {

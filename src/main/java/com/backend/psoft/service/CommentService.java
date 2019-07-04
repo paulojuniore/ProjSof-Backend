@@ -75,7 +75,7 @@ public class CommentService {
 			String nameUser = (user.getFirstName() + " " + user.getLastName());
 			comment.setUser_name(nameUser);
 			comment.setCommentParent(id);
-			comment.setData(new Date());
+			comment.setData();
 			comment.setUser_email(emailUser);
 			comment.setId_subject(subject.getId());
 			commentAux.addCommentResp(comment);
