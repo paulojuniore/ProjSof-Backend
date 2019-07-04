@@ -53,7 +53,8 @@ public class CommentController {
 			throw new UserOfflineException("Usuário não logado!");
 		}
 		commentService.create(comment, emailUser);
-		return new ResponseEntity<SubjectProfile>(subjectService.getPerfilSubject(comment.getId_subject(), comment.getUser_email()), HttpStatus.CREATED);
+		SubjectProfile resp = subjectService.getPerfilSubject(comment.getId_subject(), comment.getUser_email());
+		return new ResponseEntity<SubjectProfile>(resp, HttpStatus.CREATED);
 	}
 
 	/*
@@ -85,7 +86,7 @@ public class CommentController {
 	@CrossOrigin
 	@DeleteMapping("/deleteComment/{id}")
 	@ApiOperation(value = "Remove um comentário a partir do seu identificador único.")
-	ResponseEntity<Comment> deleteComment(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException {
+	ResponseEntity<SubjectProfile> deleteComment(@PathVariable long id, @RequestHeader(value = "Authorization") String token) throws ServletException {
 		Comment comment = commentService.findById(id);
 		if(comment == null) {
 			throw new ServletException("Comentário inexistente!");
@@ -97,7 +98,7 @@ public class CommentController {
 		}
 
 		commentService.deleteComment(comment, emailUser);
-		return new ResponseEntity<Comment>(HttpStatus.OK);
+		return new ResponseEntity<SubjectProfile>(subjectService.getPerfilSubject(comment.getId_subject(), emailUser), HttpStatus.OK);
 	}
 
 	/**
